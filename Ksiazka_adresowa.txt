@@ -1,0 +1,11 @@
+1|2|Adam|Nowak|123456789|adam.nowak@gmail.com|Konwaliowa 12, 99-060 Warszawa|
+2|2|Ma³gorzata|Nowak|999888777|mal.nowak@gmail.com|Konwaliowa 12, 99-060 Warszawa|
+3|1|Kunegunda|Hirsh|312312312|kun.pyrz@gmail.com|Nowy Swiat 87/12, 67-043 Suchy Las|
+4|1|Robert|Janik|981265142|rob.jan@gmail.com|Pierwiastkowa 91D/2, 57-550 Stronie Slaskie|
+5|3|Jan|Tarczynski|176176176|janeczek@gmail.com|Konwaliowa 12, 99-060 Warszawa|
+6|3|Anna|Lis|111777111|anna-lis123@wp.pl|Nowy Swiat 87/12, 67-043 Suchy Las|
+7|1|Milosz|Zaborski|987654321|mily3@onet.pl|Pierwiastkowa 91D/2, 57-550 Stronie Slaskie|
+8|2|Leonard|Mik|123123123|leo98@wp.pl|Nowy Swiat 87/12, 67-043 Suchy Las|
+10|2|Janusz|Brzdek|999111999|przyklad1@wp.pl|Jordanow Slaski 61-098, Jaworowa 12|
+11|1|Mikolaj|Kostka|141141141|szarqaz@wp.pl|Lipowa 54, Poznan|
+12|2|Romuald|Likowski|333333222|romus@wp.pl|Fiolkowa 77/13, Radzymin|

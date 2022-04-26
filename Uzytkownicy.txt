@@ -1,0 +1,4 @@
+1|Uzytkownik1|admin1|
+2|TUzytkownik2|admin2|
+3|Uzytkownik3|admin3|
+4|Uzytkownik4|admin4|
