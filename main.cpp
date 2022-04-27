@@ -348,7 +348,7 @@ int registration(vector <User> &users,int totalNumberOfUsers) {
     cin >> password;
     signedInUser.login = login;
     signedInUser.password = password;
-    signedInUser.userId = users[users.size() - 1].userId + 1 ;
+    signedInUser.userId = userId;
     users.push_back(signedInUser);
     cout << "Konto zalozone" << endl;
     Sleep(1000);
