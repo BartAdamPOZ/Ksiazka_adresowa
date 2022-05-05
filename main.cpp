@@ -13,9 +13,9 @@ struct Friend {
     int phoneNumber, friendId, ownerId;
 };
 
-struct User {
-    int userId;
-    string login, password;
+struct Uzytkownik {
+    int idUzytkownika;
+    string nazwa, haslo;
 };
 
 void displayDataAboutFriend(vector<Friend> &friends, int i) {
@@ -67,7 +67,7 @@ void deleteAllDataInFile() {
 
 }
 
-void saveDataToFile_Adresaci_uzytkownika (vector <Friend> &friends) {
+void saveDataToFile (vector <Friend> &friends) {
 
     fstream file;
     Friend myFriend;
@@ -88,29 +88,6 @@ void saveDataToFile_Adresaci_uzytkownika (vector <Friend> &friends) {
 
     file.close();
     friends.shrink_to_fit();
-}
-
-void saveDataToFile_Uzytkownicy (vector <User> &users, int totalNumberOfUsers) {
-
-    fstream file;
-    User signedInUser;
-
-    file.open("Uzytkownicy.txt", ios::out | ios::trunc);
-    file.close();
-
-    file.open("Uzytkownicy.txt",ios::out | ios:: app);
-
-
-    for (int i = 0; i < users.size(); i++) {
-
-        file << users[i].userId << "|";
-        file << users[i].login << "|";
-        file << users[i].password << "|";
-        file << endl;
-    }
-
-    file.close();
-    users.shrink_to_fit();
 }
 
 void deleteFriendFromList (vector <Friend> &friends) {
@@ -143,7 +120,7 @@ void deleteFriendFromList (vector <Friend> &friends) {
                 auto it = friends.begin() + i;
                 friends.erase(it);
                 deleteAllDataInFile();
-                saveDataToFile_Adresaci_uzytkownika(friends);
+                saveDataToFile(friends);
                 cout << "Pomyslnie usunieto znajomego." << endl;
                 Sleep(2000);
             }
@@ -208,7 +185,7 @@ void editData (vector <Friend> &friends, int idOfFriendToEdit, char dataToEdit) 
         }
     }
     deleteAllDataInFile();
-    saveDataToFile_Adresaci_uzytkownika(friends);
+    saveDataToFile(friends);
     cout << "Pomyslanie zmieniono dane znajomego." << endl;
     Sleep(2000);
 }
@@ -272,12 +249,64 @@ void displayFriendsList(vector<Friend> &friends) {
     getch();
 }
 
+/*void readDataFromFile (vector <Friend> &friends) {
 
-void addNewFriend (vector <Friend> &friends, vector <User> users, int &loggedInUserId, int &lastRecipientId) {
+    Friend myFriend;
+
+    fstream file;
+    file.open("Ksiazka_adresowa.txt", ios::out | ios:: app);
+    file.close();
+
+    file.open("Ksiazka_adresowa.txt", ios::in);
+
+    if(file.good() == false) {
+        cout << "Plik nie istnieje!";
+        exit(0);
+    }
+
+    string line;
+    int item = 1;
+
+    while (getline (file, line, '|')) {
+        switch (item) {
+        case 1:
+            myFriend.friendId = atoi(line.c_str());
+            break;
+        case 2:
+            myFriend.ownerId = atoi(line.c_str());
+            break;
+        case 3:
+            myFriend.friendName = line;
+            break;
+        case 4:
+            myFriend.friendSurname = line;
+            break;
+        case 5:
+            myFriend.phoneNumber = atoi(line.c_str());
+            break;
+        case 6:
+            myFriend.friendMail = line;
+            break;
+        case 7:
+            myFriend.friendAddress = line;
+            break;
+        }
+        if(item == 7) {
+            item = 1;
+            friends.push_back(myFriend);
+        } else {
+            item++;
+        }
+    }
+    file << endl;
+    file.close();
+}*/
+
+void addNewFriend (vector <Friend> &friends, vector <Uzytkownik> uzytkownicy, int &idZalogowanegoUzytkownika, int &ostatnieIdAdresata) {
     string name, surname, address, mail;
     int phone, id;
     Friend myFriend;
-    User signedInUser;
+    Uzytkownik mojUzytkownik;
 
     cout << "Dodaj swojego znajomego! Wprowadz dane ponizej: " << endl;
 
@@ -296,11 +325,11 @@ void addNewFriend (vector <Friend> &friends, vector <User> users, int &loggedInU
     if (friends.size() == 0) {
         id = 1;
     } else {
-        id = lastRecipientId + 1;
+        id = ostatnieIdAdresata + 1;
     }
 
     myFriend.friendId = id;
-    myFriend.ownerId = loggedInUserId;
+    myFriend.ownerId = idZalogowanegoUzytkownika;
     myFriend.friendName = name;
     myFriend.friendSurname = surname;
     myFriend.friendAddress = address;
@@ -316,7 +345,7 @@ void addNewFriend (vector <Friend> &friends, vector <User> users, int &loggedInU
 
 
     file << id << "|";
-    file << loggedInUserId << "|";
+    file << idZalogowanegoUzytkownika << "|";
     file << name << "|";
     file << surname<< "|";
     file << phone << "|";
@@ -324,32 +353,34 @@ void addNewFriend (vector <Friend> &friends, vector <User> users, int &loggedInU
     file << address<< "|" << endl;
 
     file.close();
-    lastRecipientId++;
+    ostatnieIdAdresata++;
 }
 
-int registration(vector <User> &users,int totalNumberOfUsers) {
-    User signedInUser;
-    string login, password;
-    int userId = totalNumberOfUsers +1;
+/* z drugiego programu */
+
+int rejestracja(vector <Uzytkownik> &uzytkownicy,int iloscUzytkownikow) {
+    Uzytkownik mojUzytkownik;
+    string nazwa, haslo;
+    int idUzytkownika = iloscUzytkownikow +1;
     cout << "Podaj nazwe uzytkownika: ";
-    cin >> login;
+    cin >> nazwa;
 
     int i = 0;
-    while (i < totalNumberOfUsers) {
-        if (users[i].login == login) {
+    while (i < iloscUzytkownikow) {
+        if (uzytkownicy[i].nazwa == nazwa) {
             cout << "Taki uzytkownik juz istnieje. Wpisz inna nazwe uzytkownika: ";
-            cin >> login;
+            cin >> nazwa;
             i = -1;
         } else {
             i++;
         }
     }
     cout << "Podaj haslo: ";
-    cin >> password;
-    signedInUser.login = login;
-    signedInUser.password = password;
-    signedInUser.userId = userId;
-    users.push_back(signedInUser);
+    cin >> haslo;
+    mojUzytkownik.nazwa = nazwa;
+    mojUzytkownik.haslo = haslo;
+    mojUzytkownik.idUzytkownika = uzytkownicy[uzytkownicy.size() - 1].idUzytkownika + 1 ;
+    uzytkownicy.push_back(mojUzytkownik);
     cout << "Konto zalozone" << endl;
     Sleep(1000);
 
@@ -357,30 +388,31 @@ int registration(vector <User> &users,int totalNumberOfUsers) {
     file.open("Uzytkownicy.txt",ios::out | ios:: app);
 
 
-    file << userId << "|";
-    file << login << "|";
-    file << password<< "|" << endl;
+    file << idUzytkownika << "|";
+    file << nazwa << "|";
+    file << haslo<< "|" << endl;
 
     file.close();
 
-    return totalNumberOfUsers+1;
+    return iloscUzytkownikow+1;
 }
 
-int signIn(vector <User> &users, int totalNumberOfUsers) {
-    User signedInUser;
-    string login, password;
+int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow) {
+    Uzytkownik mojUzytkownik;
+    string nazwa, haslo;
     cout << "Podaj nazwe: ";
-    cin >> login;
+    cin >> nazwa;
     int i = 0;
-    while (i < totalNumberOfUsers) {
-        if (users[i].login == login) {
-            for(int attempt = 0; attempt < 3; attempt++) {
-                cout << "Podaj haslo. Pozostalo prob " << 3 - attempt << ": ";
-                cin >> password;
-                if(users[i].password == password) {
-                    cout << "Zalogowano." << endl;
+    while (i < iloscUzytkownikow) {
+        if (uzytkownicy[i].nazwa == nazwa) {
+            for(int proby = 0; proby < 3; proby++) {
+                cout << "Podaj haslo. Pozostalo prob " << 3 - proby << ": ";
+                cin >> haslo;
+                if(uzytkownicy[i].haslo == haslo) {
+                    cout << "Zalogowales sie." << endl;
+                    //cout << "Twoje id Uzytkownika to: " << uzytkownicy[i].idUzytkownika << endl;
                     Sleep(1000);
-                    return users[i].userId;
+                    return uzytkownicy[i].idUzytkownika;
                 }
             }
             cout << "Podales 3 razy bledne haslo. Poczekaj 3 sekundy przed kolejna proba" << endl;
@@ -395,25 +427,28 @@ int signIn(vector <User> &users, int totalNumberOfUsers) {
 
 }
 
-void changePassword(vector <User> &users, int totalNumberOfUsers, int loggedInUserId) {
+void zmianaHasla(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow, int idZalogowanegoUzytkownika) {
 
-    User signedInUser;
-    string password;
+    Uzytkownik mojUzytkownik;
+    string haslo;
     cout << "Podaj nowe haslo: ";
-    cin >> password;
-    for (int i = 0; i < totalNumberOfUsers; i++) {
-        if(users[i].userId == loggedInUserId) {
-            users[i].password = password;
+    cin >> haslo;
+    for (int i = 0; i < iloscUzytkownikow; i++) {
+        if(uzytkownicy[i].idUzytkownika == idZalogowanegoUzytkownika) {
+            uzytkownicy[i].haslo = haslo;
             cout << "Haslo zostalo zmienione" << endl;
             Sleep(1500);
-            saveDataToFile_Uzytkownicy(users, totalNumberOfUsers);
         }
     }
 }
 
-void loadDataFromFile_Uzytkownicy(vector <User> &users, int &totalNumberOfUsers) {
+/* z drugiego programu */
 
-    User signedInUser;
+/* nowe modyfikacje */
+
+void wczytajDaneZplikuUzytkownicy(vector <Uzytkownik> &uzytkownicy, int &iloscUzytkownikow) {
+
+    Uzytkownik mojUzytkownik;
 
     fstream file;
     file.open("Uzytkownicy.txt", ios::out | ios:: app);
@@ -433,19 +468,19 @@ void loadDataFromFile_Uzytkownicy(vector <User> &users, int &totalNumberOfUsers)
     while (getline (file, line, '|')) {
         switch (item) {
         case 1:
-            signedInUser.userId = atoi(line.c_str());
+            mojUzytkownik.idUzytkownika = atoi(line.c_str());
             break;
         case 2:
-            signedInUser.login = line;
+            mojUzytkownik.nazwa = line;
             break;
         case 3:
-            signedInUser.password = line;
+            mojUzytkownik.haslo = line;
             break;
         }
         if(item == 3) {
             item = 1;
-            users.push_back(signedInUser);
-            totalNumberOfUsers++;
+            uzytkownicy.push_back(mojUzytkownik);
+            iloscUzytkownikow++;
         } else {
             item++;
         }
@@ -454,14 +489,14 @@ void loadDataFromFile_Uzytkownicy(vector <User> &users, int &totalNumberOfUsers)
     file.close();
 }
 
-bool checkRecipientOwner (int ACTUAL_ID_TO_CHECK, int loggedInUserId) {
-    if (ACTUAL_ID_TO_CHECK == loggedInUserId)
+bool sprawdzCzyToAdresatUzytkownika (int AKTUALNE_ID_DO_SPRAWDZENIA, int idZalogowanegoUzytkownika) {
+    if (AKTUALNE_ID_DO_SPRAWDZENIA == idZalogowanegoUzytkownika)
         return true;
     else
         return false;
 }
 
-void getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId, int &lastRecipientId) {
+void wyodrebnijAdresatowZalogowanegoUzytkownika (vector <Friend> &friends, int idZalogowanegoUzytkownika, int &ostatnieIdAdresata) {
 
     Friend myFriend;
 
@@ -505,10 +540,10 @@ void getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId
         }
         if(item == 7) {
             item = 1;
-            int ACTUAL_ID_TO_CHECK = myFriend.ownerId;
-            lastRecipientId = myFriend.friendId;
+            int AKTUALNE_ID_DO_SPRAWDZENIA = myFriend.ownerId;
+            ostatnieIdAdresata = myFriend.friendId;
 
-            if (checkRecipientOwner(ACTUAL_ID_TO_CHECK, loggedInUserId) == true) {
+            if (sprawdzCzyToAdresatUzytkownika(AKTUALNE_ID_DO_SPRAWDZENIA, idZalogowanegoUzytkownika) == true) {
                 friends.push_back(myFriend);
             }
         } else {
@@ -517,10 +552,10 @@ void getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId
     }
     file << endl;
     file.close();
-    saveDataToFile_Adresaci_uzytkownika(friends);
+    saveDataToFile(friends);
 }
 
-void clearFileWithUserRecipients (vector <Friend> &friends, int &totalNumberOfUsers) {
+void zresetujAdresatow (vector <Friend> &friends, int &iloscUzytkownikow) {
 
     Friend myFriend;
 
@@ -531,12 +566,13 @@ void clearFileWithUserRecipients (vector <Friend> &friends, int &totalNumberOfUs
     friends.clear();
 }
 
-void dataSynchronization(vector <Friend> &friends) {
+void synchronizujKsiazkeAdresatow(vector <Friend> &friends) {
 
     Friend myFriend;
     string friendNameTemporary, friendSurnameTemporary, friendAddressTemporary, friendMailTemporary;
     int phoneNumberTemporary, friendIdTemporary, ownerIdTemporary;
 
+    getch(); //pozniej do usuniecia
     fstream file;
     file.open("Ksiazka_adresowa.txt", ios::out | ios::app );
     file.close();
@@ -579,17 +615,8 @@ void dataSynchronization(vector <Friend> &friends) {
         if(item == 7) {
             item = 1;
 
-            if (friends[i].ownerId != ownerIdTemporary) {
+            if (friends[i].friendId == friendIdTemporary) {
 
-                file2 << friendIdTemporary << "|";
-                file2 << ownerIdTemporary << "|";
-                file2 << friendNameTemporary << "|";
-                file2 << friendSurnameTemporary << "|";
-                file2 << phoneNumberTemporary << "|";
-                file2 << friendMailTemporary << "|";
-                file2 << friendAddressTemporary << "|" << endl;
-
-            } else if (friends[i].friendId == friendIdTemporary) {
                 file2 << friends[i].friendId << "|";
                 file2 << friends[i].ownerId << "|";
                 file2 << friends[i].friendName << "|";
@@ -597,54 +624,69 @@ void dataSynchronization(vector <Friend> &friends) {
                 file2 << friends[i].phoneNumber << "|";
                 file2 << friends[i].friendMail << "|";
                 file2 << friends[i].friendAddress<< "|" << endl;
+                displayDataAboutFriend(friends, i);
+                getch();
                 auto it = friends.begin() + i;
                 friends.erase(it);
+            } else {
+                file2 << friendIdTemporary << "|";
+                file2 << ownerIdTemporary << "|";
+                file2 << friendNameTemporary << "|";
+                file2 << friendSurnameTemporary << "|";
+                file2 << phoneNumberTemporary << "|";
+                file2 << friendMailTemporary << "|";
+                file2 << friendAddressTemporary << "|" << endl;
             }
         } else {
             item++;
         }
     }
     for(int j = 0; j < friends.size(); j++) {
-        file2 << friends[j].friendId << "|";
-        file2 << friends[j].ownerId << "|";
-        file2 << friends[j].friendName << "|";
-        file2 << friends[j].friendSurname<< "|";
-        file2 << friends[j].phoneNumber << "|";
-        file2 << friends[j].friendMail << "|";
-        file2 << friends[j].friendAddress<< "|" << endl;
-    }
+            file2 << friends[j].friendId << "|";
+            file2 << friends[j].ownerId << "|";
+            file2 << friends[j].friendName << "|";
+            file2 << friends[j].friendSurname<< "|";
+            file2 << friends[j].phoneNumber << "|";
+            file2 << friends[j].friendMail << "|";
+            file2 << friends[j].friendAddress<< "|" << endl;
+        }
     file2.close();
     file.close();
     remove("Ksiazka_adresowa.txt");
     rename("Ksiazka_adresowa_tymczasowa.txt", "Ksiazka_adresowa.txt");
 }
 
-int main() {
+/*nowe modyfikacje*/
 
+
+int main() {
     char choice = 0;
     vector<Friend> friends;
 
-    vector<User> users;
-    int loggedInUserId = 0;
-    int totalNumberOfUsers = 0;
-    int lastRecipientId = 0;
+    vector<Uzytkownik> uzytkownicy;
+    int idZalogowanegoUzytkownika = 0;
+    int iloscUzytkownikow = 0;
+    int ostatnieIdAdresata = 0;
 
-    loadDataFromFile_Uzytkownicy(users, totalNumberOfUsers);
+    char wybor;
+
+    wczytajDaneZplikuUzytkownicy(uzytkownicy, iloscUzytkownikow);
+
 
     while(1) {
-        if(loggedInUserId == 0) {
+        if(idZalogowanegoUzytkownika == 0) {
             system("cls");
             cout << "1. Rejestracja" << endl;
             cout << "2. Logowanie" << endl;
             cout << "9. Zakoncz program" << endl;
-            cin >> choice;
+            cin >> wybor;
 
-            if (choice == '1') {
-                totalNumberOfUsers = registration(users,totalNumberOfUsers);
-            } else if (choice == '2') {
-                loggedInUserId = signIn(users, totalNumberOfUsers);
-                getOnlyLoggedInUserRecipients(friends, loggedInUserId, lastRecipientId);
-            } else if (choice == '9') {
+            if (wybor == '1') {
+                iloscUzytkownikow = rejestracja(uzytkownicy,iloscUzytkownikow);
+            } else if (wybor == '2') {
+                idZalogowanegoUzytkownika = logowanie(uzytkownicy, iloscUzytkownikow);
+                wyodrebnijAdresatowZalogowanegoUzytkownika(friends, idZalogowanegoUzytkownika, ostatnieIdAdresata);
+            } else if (wybor == '9') {
                 exit(0);
             }
         } else {
@@ -657,10 +699,11 @@ int main() {
             cout << "6. Edytuj adresata" << endl;
             cout << "7. Zmien haslo" << endl;
             cout << "8. Wyloguj sie" << endl;
+            //cout << "9. Zakoncz program" << endl;//
             cin >> choice;
 
             if (choice == '1') {
-                addNewFriend(friends, users,loggedInUserId, lastRecipientId);
+                addNewFriend(friends, uzytkownicy,idZalogowanegoUzytkownika, ostatnieIdAdresata);
             } else if (choice == '2') {
                 searchByName(friends);
             } else if (choice == '3') {
@@ -671,13 +714,15 @@ int main() {
                 deleteFriendFromList(friends);
             } else if (choice == '6') {
                 editDataAboutFriend(friends);
-            }
-            else if (choice == '7') {
-                changePassword(users, totalNumberOfUsers, loggedInUserId);
-            } else if (choice == '8') {
-                dataSynchronization (friends);
-                clearFileWithUserRecipients (friends, totalNumberOfUsers);
-                loggedInUserId = 0;
+            } /*else if (choice == '9') {
+                exit(0);
+            }*/
+            else if (choice == '7') { /* z drugiego programu*/
+                zmianaHasla(uzytkownicy, iloscUzytkownikow, idZalogowanegoUzytkownika);
+            } else if (choice == '8') { /* z drugiego programu*/
+                synchronizujKsiazkeAdresatow (friends);
+                zresetujAdresatow (friends, iloscUzytkownikow);
+                idZalogowanegoUzytkownika = 0;
             }
         }
     }
