@@ -72,7 +72,7 @@ void deleteAllDataInFile() {
 
 }
 
-void saveDataToFile_Adresaci_uzytkownika (vector <Friend> friends) {
+void saveDataToFileAdresaci_uzytkownika (vector <Friend> friends) {
 
     fstream file;
 
@@ -93,7 +93,7 @@ void saveDataToFile_Adresaci_uzytkownika (vector <Friend> friends) {
     friends.shrink_to_fit();
 }
 
-void saveDataToFile_Uzytkownicy (vector <User> users, int totalNumberOfUsers) {
+void saveDataToFileUzytkownicy (vector <User> users, int totalNumberOfUsers) {
 
     fstream file;
 
@@ -144,7 +144,7 @@ void deleteFriendFromList (vector <Friend> &friends) {
                 auto it = friends.begin() + i;
                 friends.erase(it);
                 deleteAllDataInFile();
-                saveDataToFile_Adresaci_uzytkownika(friends);
+                saveDataToFileAdresaci_uzytkownika(friends);
                 cout << "Pomyslnie usunieto znajomego." << endl;
                 Sleep(2000);
             }
@@ -210,7 +210,7 @@ void editData (vector <Friend> &friends, int idOfFriendToEdit, char dataToEdit) 
     }
 
     deleteAllDataInFile();
-    saveDataToFile_Adresaci_uzytkownika(friends);
+    saveDataToFileAdresaci_uzytkownika(friends);
     cout << "Pomyslanie zmieniono dane znajomego." << endl;
     Sleep(2000);
 }
@@ -320,7 +320,7 @@ int addNewFriend (vector <Friend> &friends, int loggedInUserId, int lastRecipien
     Sleep(2000);
 
     clearFileWithUserRecipients();
-    saveDataToFile_Adresaci_uzytkownika(friends);
+    saveDataToFileAdresaci_uzytkownika(friends);
 
     lastRecipientId++;
 
@@ -404,12 +404,12 @@ void changePassword(vector <User> &users, int totalNumberOfUsers, int loggedInUs
             users[i].password = password;
             cout << "Haslo zostalo zmienione" << endl;
             Sleep(1500);
-            saveDataToFile_Uzytkownicy(users, totalNumberOfUsers);
+            saveDataToFileUzytkownicy(users, totalNumberOfUsers);
         }
     }
 }
 
-void loadDataFromFile_Uzytkownicy(vector <User> &users, int &totalNumberOfUsers) {
+void loadDataFromFileUzytkownicy(vector <User> &users, int &totalNumberOfUsers) {
 
     User signedInUser;
 
@@ -515,7 +515,7 @@ int getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId,
     }
     file << endl;
     file.close();
-    saveDataToFile_Adresaci_uzytkownika(friends);
+    saveDataToFileAdresaci_uzytkownika(friends);
 
     return lastRecipientId;
 }
@@ -618,7 +618,7 @@ int main() {
     int lastRecipientId = 0;
     int item;
 
-    loadDataFromFile_Uzytkownicy(users, totalNumberOfUsers);
+    loadDataFromFileUzytkownicy(users, totalNumberOfUsers);
 
     while(1) {
         if(loggedInUserId == 0) {
