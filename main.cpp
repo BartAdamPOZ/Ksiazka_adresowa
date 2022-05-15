@@ -419,7 +419,7 @@ void loadDataFromFileUzytkownicy(vector <User> &users, int &totalNumberOfUsers) 
 
     file.open("Uzytkownicy.txt", ios::in);
 
-    if(file.good() == false) {
+    if(!file.good()) {
         cout << "Plik nie istnieje!";
 
         exit(0);
@@ -453,10 +453,12 @@ void loadDataFromFileUzytkownicy(vector <User> &users, int &totalNumberOfUsers) 
 }
 
 bool checkRecipientOwner (int ACTUAL_ID_TO_CHECK, int loggedInUserId) {
-    if (ACTUAL_ID_TO_CHECK == loggedInUserId)
+    if (ACTUAL_ID_TO_CHECK == loggedInUserId){
         return true;
-    else
+    }
+    else {
         return false;
+    }
 }
 
 int getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId, int lastRecipientId) {
@@ -467,7 +469,7 @@ int getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId,
     file.open("Ksiazka_adresowa.txt", ios::out | ios:: app);
     file.close();
 
-    if(file.good() == false) {
+    if(!file.good()) {
         cout << "Plik nie istnieje!";
         exit(0);
     }
