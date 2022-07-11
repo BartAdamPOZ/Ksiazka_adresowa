@@ -18,13 +18,6 @@ struct User {
     string login, password;
 };
 
-void clearFileWithUserRecipients () {
-
-    fstream file;
-    file.open("Adresaci_uzytkownika.txt", ios::out | ios::trunc);
-    file.close();
-}
-
 void displayDataAboutFriend(vector<Friend> friends, int i) {
     cout << "Imie i nazwisko: " << friends[i].friendName << " ";
     cout << friends[i].friendSurname << endl;
@@ -62,35 +55,6 @@ void searchBySurname (vector <Friend> friends) {
     }
     cout << "Aby kontynuowac nacisnij dowolny klawisz ... ";
     getch();
-}
-
-void deleteAllDataInFile() {
-
-    fstream file;
-    file.open("Adresaci_uzytkownika.txt",ios::trunc| ios::in | ios::out);
-    file.close();
-
-}
-
-void saveDataToFileAdresaci_uzytkownika (vector <Friend> friends) {
-
-    fstream file;
-
-    file.open("Adresaci_uzytkownika.txt",ios::out | ios:: app);
-
-    for (int i = 0; i < friends.size(); i++) {
-
-        file << friends[i].friendId << "|";
-        file << friends[i].ownerId << "|";
-        file << friends[i].friendName << "|";
-        file << friends[i].friendSurname << "|";
-        file << friends[i].phoneNumber << "|";
-        file << friends[i].friendMail << "|";
-        file << friends[i].friendAddress<< "|" << endl;
-    }
-
-    file.close();
-    friends.shrink_to_fit();
 }
 
 void saveDataToFileUzytkownicy (vector <User> users, int totalNumberOfUsers) {
@@ -143,8 +107,7 @@ void deleteFriendFromList (vector <Friend> &friends) {
             if (idToDelete == friends[i].friendId) {
                 auto it = friends.begin() + i;
                 friends.erase(it);
-                deleteAllDataInFile();
-                saveDataToFileAdresaci_uzytkownika(friends);
+                //dataSynchronization (friends);
                 cout << "Pomyslnie usunieto znajomego." << endl;
                 Sleep(2000);
             }
@@ -209,8 +172,7 @@ void editData (vector <Friend> &friends, int idOfFriendToEdit, char dataToEdit) 
         break;
     }
 
-    deleteAllDataInFile();
-    saveDataToFileAdresaci_uzytkownika(friends);
+    //dataSynchronization (friends);
     cout << "Pomyslanie zmieniono dane znajomego." << endl;
     Sleep(2000);
 }
@@ -319,8 +281,7 @@ int addNewFriend (vector <Friend> &friends, int loggedInUserId, int lastRecipien
     cout << "Pomyslnie dodano znajomego!";
     Sleep(2000);
 
-    clearFileWithUserRecipients();
-    saveDataToFileAdresaci_uzytkownika(friends);
+    //dataSynchronization (friends);
 
     lastRecipientId++;
 
@@ -517,7 +478,7 @@ int getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId,
     }
     file << endl;
     file.close();
-    saveDataToFileAdresaci_uzytkownika(friends);
+    //dataSynchronization (friends);
 
     return lastRecipientId;
 }
@@ -679,7 +640,6 @@ int main() {
                 break;
             case 8:
                 dataSynchronization (friends);
-                clearFileWithUserRecipients ();
                 friends.clear();
                 loggedInUserId = 0;
                 break;
