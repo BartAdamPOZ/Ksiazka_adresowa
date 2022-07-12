@@ -18,6 +18,95 @@ struct User {
     string login, password;
 };
 
+void dataSynchronization(vector <Friend> &friends) {
+
+    Friend myFriend;
+    string friendNameTemporary, friendSurnameTemporary, friendAddressTemporary, friendMailTemporary;
+    int phoneNumberTemporary, friendIdTemporary, ownerIdTemporary;
+
+    fstream file;
+    file.open("Ksiazka_adresowa.txt", ios::out | ios::app );
+    file.close();
+
+    fstream file2;
+    file2.open("Ksiazka_adresowa_tymczasowa.txt", ios::out | ios::app );
+    file2.close();
+
+    string line;
+    int item = 1;
+    int i = 0;
+
+    file.open("Ksiazka_adresowa.txt", ios::in);
+    file2.open("Ksiazka_adresowa_tymczasowa.txt", ios::out | ios::app );
+
+    while (getline (file, line, '|')) {
+        switch (item) {
+        case 1:
+            friendIdTemporary = atoi(line.c_str());
+            break;
+        case 2:
+            ownerIdTemporary = atoi(line.c_str());
+            break;
+        case 3:
+            friendNameTemporary = line;
+            break;
+        case 4:
+            friendSurnameTemporary = line;
+            break;
+        case 5:
+            phoneNumberTemporary = atoi(line.c_str());
+            break;
+        case 6:
+            friendMailTemporary = line;
+            break;
+        case 7:
+            friendAddressTemporary = line;
+            break;
+        }
+        if(item == 7) {
+            item = 1;
+
+            if (friends[0].ownerId != ownerIdTemporary) {
+
+                file2 << friendIdTemporary << "|";
+                file2 << ownerIdTemporary << "|";
+                file2 << friendNameTemporary << "|";
+                file2 << friendSurnameTemporary << "|";
+                file2 << phoneNumberTemporary << "|";
+                file2 << friendMailTemporary << "|";
+                file2 << friendAddressTemporary << "|" << endl;
+
+            } else if (friends[i].friendId == friendIdTemporary && i < friends.size()) {
+                file2 << friends[i].friendId << "|";
+                file2 << friends[i].ownerId << "|";
+                file2 << friends[i].friendName << "|";
+                file2 << friends[i].friendSurname<< "|";
+                file2 << friends[i].phoneNumber << "|";
+                file2 << friends[i].friendMail << "|";
+                file2 << friends[i].friendAddress<< "|" << endl;
+                i++;
+            }
+        } else {
+            item++;
+        }
+    }
+
+    for(int j = i; j < friends.size(); j++) {
+        file2 << friends[j].friendId << "|";
+        file2 << friends[j].ownerId << "|";
+        file2 << friends[j].friendName << "|";
+        file2 << friends[j].friendSurname<< "|";
+        file2 << friends[j].phoneNumber << "|";
+        file2 << friends[j].friendMail << "|";
+        file2 << friends[j].friendAddress<< "|" << endl;
+    }
+    file2.close();
+    file.close();
+    remove("Ksiazka_adresowa.txt");
+    rename("Ksiazka_adresowa_tymczasowa.txt", "Ksiazka_adresowa.txt");
+}
+
+
 void displayDataAboutFriend(vector<Friend> friends, int i) {
     cout << "Imie i nazwisko: " << friends[i].friendName << " ";
     cout << friends[i].friendSurname << endl;
@@ -107,7 +196,7 @@ void deleteFriendFromList (vector <Friend> &friends) {
             if (idToDelete == friends[i].friendId) {
                 auto it = friends.begin() + i;
                 friends.erase(it);
-                //dataSynchronization (friends);
+                dataSynchronization (friends);
                 cout << "Pomyslnie usunieto znajomego." << endl;
                 Sleep(2000);
             }
@@ -172,7 +261,7 @@ void editData (vector <Friend> &friends, int idOfFriendToEdit, char dataToEdit) 
         break;
     }
 
-    //dataSynchronization (friends);
+    dataSynchronization (friends);
     cout << "Pomyslanie zmieniono dane znajomego." << endl;
     Sleep(2000);
 }
@@ -281,7 +370,7 @@ int addNewFriend (vector <Friend> &friends, int loggedInUserId, int lastRecipien
     cout << "Pomyslnie dodano znajomego!";
     Sleep(2000);
 
-    //dataSynchronization (friends);
+    dataSynchronization (friends);
 
     lastRecipientId++;
 
@@ -414,10 +503,9 @@ void loadDataFromFileUzytkownicy(vector <User> &users, int &totalNumberOfUsers) 
 }
 
 bool checkRecipientOwner (int ACTUAL_ID_TO_CHECK, int loggedInUserId) {
-    if (ACTUAL_ID_TO_CHECK == loggedInUserId){
+    if (ACTUAL_ID_TO_CHECK == loggedInUserId) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -478,97 +566,7 @@ int getOnlyLoggedInUserRecipients (vector <Friend> &friends, int loggedInUserId,
     }
     file << endl;
     file.close();
-    //dataSynchronization (friends);
-
     return lastRecipientId;
-}
-
-void dataSynchronization(vector <Friend> &friends) {
-
-    Friend myFriend;
-    string friendNameTemporary, friendSurnameTemporary, friendAddressTemporary, friendMailTemporary;
-    int phoneNumberTemporary, friendIdTemporary, ownerIdTemporary;
-
-    fstream file;
-    file.open("Ksiazka_adresowa.txt", ios::out | ios::app );
-    file.close();
-
-    fstream file2;
-    file2.open("Ksiazka_adresowa_tymczasowa.txt", ios::out | ios::app );
-    file2.close();
-
-    string line;
-    int item = 1;
-    int i = 0;
-
-    file.open("Ksiazka_adresowa.txt", ios::in);
-    file2.open("Ksiazka_adresowa_tymczasowa.txt", ios::out | ios::app );
-
-    while (getline (file, line, '|')) {
-        switch (item) {
-        case 1:
-            friendIdTemporary = atoi(line.c_str());
-            break;
-        case 2:
-            ownerIdTemporary = atoi(line.c_str());
-            break;
-        case 3:
-            friendNameTemporary = line;
-            break;
-        case 4:
-            friendSurnameTemporary = line;
-            break;
-        case 5:
-            phoneNumberTemporary = atoi(line.c_str());
-            break;
-        case 6:
-            friendMailTemporary = line;
-            break;
-        case 7:
-            friendAddressTemporary = line;
-            break;
-        }
-        if(item == 7) {
-            item = 1;
-
-            if (friends[i].ownerId != ownerIdTemporary) {
-
-                file2 << friendIdTemporary << "|";
-                file2 << ownerIdTemporary << "|";
-                file2 << friendNameTemporary << "|";
-                file2 << friendSurnameTemporary << "|";
-                file2 << phoneNumberTemporary << "|";
-                file2 << friendMailTemporary << "|";
-                file2 << friendAddressTemporary << "|" << endl;
-
-            } else if (friends[i].friendId == friendIdTemporary) {
-                file2 << friends[i].friendId << "|";
-                file2 << friends[i].ownerId << "|";
-                file2 << friends[i].friendName << "|";
-                file2 << friends[i].friendSurname<< "|";
-                file2 << friends[i].phoneNumber << "|";
-                file2 << friends[i].friendMail << "|";
-                file2 << friends[i].friendAddress<< "|" << endl;
-                auto it = friends.begin() + i;
-                friends.erase(it);
-            }
-        } else {
-            item++;
-        }
-    }
-    for(int j = 0; j < friends.size(); j++) {
-        file2 << friends[j].friendId << "|";
-        file2 << friends[j].ownerId << "|";
-        file2 << friends[j].friendName << "|";
-        file2 << friends[j].friendSurname<< "|";
-        file2 << friends[j].phoneNumber << "|";
-        file2 << friends[j].friendMail << "|";
-        file2 << friends[j].friendAddress<< "|" << endl;
-    }
-    file2.close();
-    file.close();
-    remove("Ksiazka_adresowa.txt");
-    rename("Ksiazka_adresowa_tymczasowa.txt", "Ksiazka_adresowa.txt");
 }
 
 int main() {
