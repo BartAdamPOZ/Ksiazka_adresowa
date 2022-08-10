@@ -1,7 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <windows.h>
+#include <fstream>
+#include <sstream>
+
 #include "Uzytkownik.h"
+
 
 using namespace std;
 class KsiazkaAdresowa
@@ -9,6 +13,8 @@ class KsiazkaAdresowa
     int idZalogowanegoUzytkownika;
     int idOstatniegoAdresata;
     int idUsunietegoAdresata;
+
+    string nazwaPlikuZUzytkownikami;
 
     vector <Uzytkownik> uzytkownicy;
 
@@ -20,9 +26,13 @@ class KsiazkaAdresowa
     int wczytajLiczbeCalkowita();
     string konwerjsaIntNaString(int liczba);
     string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
+    void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
+    string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
+    bool czyPlikJestPusty(fstream &plikTekstowy);
 
 
 public:
+    KsiazkaAdresowa();
     void rejestracjaUzytkownika();
     void wypiszWszystkichUzytkownikow();
 };
