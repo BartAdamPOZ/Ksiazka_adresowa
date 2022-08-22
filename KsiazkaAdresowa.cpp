@@ -1,4 +1,9 @@
-# include "KsiazkaAdresowa.h"
+#include "KsiazkaAdresowa.h"
+
+KsiazkaAdresowa::KsiazkaAdresowa()
+{
+    uzytkownikMenedzer.wczytajUzytkownikowZPliku();
+}
 
 void KsiazkaAdresowa::rejestracjaUzytkownika()
 {
