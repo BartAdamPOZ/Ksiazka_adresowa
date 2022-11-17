@@ -29,3 +29,8 @@ char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
 {
     metodyPomocnicze.wybierzOpcjeZMenuUzytkownika();
 }
+
+void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika)
+{
+    uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+}
