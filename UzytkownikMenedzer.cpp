@@ -20,32 +20,6 @@ int UzytkownikMenedzer::logowanieUzytkownika()
     cout << endl << "Podaj login: ";
     login = MetodyPomocnicze::wczytajLinie();
 
-    /*vector <Uzytkownik>::iterator itr = uzytkownicy.begin();
-    while (itr != uzytkownicy.end())
-    {
-        if (itr -> login == login)
-        {
-            for (int iloscProb = 3; iloscProb > 0; iloscProb--)
-            {
-                cout << "Podaj haslo. Pozostalo prob: " << iloscProb << ": ";
-                haslo = MetodyPomocnicze::wczytajLinie();
-
-                if (itr -> haslo == haslo)
-                {
-                    cout << endl << "Zalogowales sie." << endl << endl;
-                    system("pause");
-                    return itr -> id;
-                }
-            }
-            cout << "Wprowadzono 3 razy bledne haslo." << endl;
-            system("pause");
-            return 0;
-        }
-        itr++;
-    }
-    cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
-    system("pause");
-    return 0;*/
     for(int i = 0; i < uzytkownicy.size(); i++)
     {
         if (uzytkownicy[i].pobierzLogin() == login)
@@ -65,6 +39,12 @@ int UzytkownikMenedzer::logowanieUzytkownika()
             cout << "Wprowadzono 3 razy bledne haslo." << endl;
             system("pause");
             return 0;
+        }
+        else
+        {
+            cout << endl << "Bledny login, sprobuj ponownie. ";
+            cout << endl << "Podaj login: ";
+            login = MetodyPomocnicze::wczytajLinie();
         }
 
     }
