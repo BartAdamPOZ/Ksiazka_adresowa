@@ -13,6 +13,7 @@ public:
     char wczytajZnak();
     static string konwerjsaIntNaString(int liczba);
     char wybierzOpcjeZMenuGlownego();
+    char wybierzOpcjeZMenuUzytkownika();
 };
 
 #endif

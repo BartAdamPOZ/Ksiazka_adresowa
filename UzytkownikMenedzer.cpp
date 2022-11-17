@@ -41,8 +41,8 @@ int UzytkownikMenedzer::logowanieUzytkownika()
             return 0;
         }
     }
-    cout << endl << "Bledny login, sprobuj ponownie. ";
-    Sleep (3000);
+    cout << endl << "Bledny login, sprobuj ponownie. " << endl << endl;
+    system("pause");
     return 0;
 }
 

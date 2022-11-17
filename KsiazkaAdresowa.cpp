@@ -24,3 +24,8 @@ void KsiazkaAdresowa::wczytajUzytkownikowZPliku()
 {
     uzytkownikMenedzer.wczytajUzytkownikowZPliku();
 }
+
+char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
+{
+    metodyPomocnicze.wybierzOpcjeZMenuUzytkownika();
+}

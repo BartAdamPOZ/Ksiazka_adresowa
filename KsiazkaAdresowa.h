@@ -23,6 +23,7 @@ public:
     void wczytajUzytkownikowZPliku();
     void wypiszWszystkichUzytkownikow();
     char wybierzOpcjeZMenuGlownego();
+    char wybierzOpcjeZMenuUzytkownika();
 };
 
 #endif

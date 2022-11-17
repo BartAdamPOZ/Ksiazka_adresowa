@@ -50,3 +50,26 @@ char MetodyPomocnicze::wybierzOpcjeZMenuGlownego()
 
     return wybor;
 }
+
+char MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika()
+{
+    char wybor;
+
+    system("cls");
+    cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Dodaj adresata" << endl;
+    cout << "2. Wyszukaj po imieniu - dostepne wkrotce" << endl;
+    cout << "3. Wyszukaj po nazwisku - dostepne wkrotce " << endl;
+    cout << "4. Wyswietl adresatow" << endl;
+    cout << "5. Usun adresata - dostepne wkrotce " << endl;
+    cout << "6. Edytuj adresata - dostepne wkrotce " << endl;
+    cout << "---------------------------" << endl;
+    cout << "7. Zmien haslo" << endl;
+    cout << "8. Wyloguj sie" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    wybor = wczytajZnak();
+
+    return wybor;
+}
