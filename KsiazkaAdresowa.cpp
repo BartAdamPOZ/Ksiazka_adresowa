@@ -14,3 +14,13 @@ int KsiazkaAdresowa::logowanieUzytkownika()
 {
     uzytkownikMenedzer.logowanieUzytkownika();
 }
+
+char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
+{
+    metodyPomocnicze.wybierzOpcjeZMenuGlownego();
+}
+
+void KsiazkaAdresowa::wczytajUzytkownikowZPliku()
+{
+    uzytkownikMenedzer.wczytajUzytkownikowZPliku();
+}

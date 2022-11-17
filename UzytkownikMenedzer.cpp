@@ -40,14 +40,10 @@ int UzytkownikMenedzer::logowanieUzytkownika()
             system("pause");
             return 0;
         }
-        else
-        {
-            cout << endl << "Bledny login, sprobuj ponownie. ";
-            cout << endl << "Podaj login: ";
-            login = MetodyPomocnicze::wczytajLinie();
-        }
-
     }
+    cout << endl << "Bledny login, sprobuj ponownie. ";
+    Sleep (3000);
+    return 0;
 }
 
 Uzytkownik UzytkownikMenedzer::podajDaneNowegoUzytkownika()

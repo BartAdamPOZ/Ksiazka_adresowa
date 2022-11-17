@@ -12,6 +12,7 @@ public:
     static string wczytajLinie();
     char wczytajZnak();
     static string konwerjsaIntNaString(int liczba);
+    char wybierzOpcjeZMenuGlownego();
 };
 
 #endif

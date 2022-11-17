@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "UzytkownikMenedzer.h"
+#include "MetodyPomocnicze.h"
 
 
 using namespace std;
@@ -12,13 +13,16 @@ using namespace std;
 class KsiazkaAdresowa
 {
     UzytkownikMenedzer uzytkownikMenedzer;
+    MetodyPomocnicze metodyPomocnicze;
 public:
     KsiazkaAdresowa(string nazwaPlikuZUzytkownikami) : uzytkownikMenedzer(nazwaPlikuZUzytkownikami) {
     uzytkownikMenedzer.wczytajUzytkownikowZPliku();
     };
     void rejestracjaUzytkownika();
     int logowanieUzytkownika();
+    void wczytajUzytkownikowZPliku();
     void wypiszWszystkichUzytkownikow();
+    char wybierzOpcjeZMenuGlownego();
 };
 
 #endif
