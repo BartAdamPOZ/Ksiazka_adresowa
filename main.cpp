@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "KsiazkaAdresowa.h"
 #include "MetodyPomocnicze.h"
@@ -9,6 +10,8 @@ int main()
 {
     int idZalogowanegoUzytkownika = 0;
     char wybor;
+    int idOstatniegoAdresata = 0;
+    vector <Adresat> adresaci;
 
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt");
 
@@ -39,18 +42,17 @@ int main()
         {
            //if (adresaci.empty() == true)
 
-                // Pobieramy idOstatniegoAdresata, po to aby zoptymalizowac program.
-                // Dzieki temu, kiedy uztykwonik bedzie dodawal nowego adresata
-                // to nie bedziemy musieli jeszcze raz ustalac idOstatniegoAdresata
-
-         //  idOstatniegoAdresata = wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
+            /*idOstatniegoAdresata =*/ ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika, idOstatniegoAdresata);
+            ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+            //cout << "iD OSTATNIEGO ADRESATA TO : " << idOstatniegoAdresata << endl; // TU JEST PROBLEM
+            //Sleep (2000);
 
             wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)
             {
             case '1': //TO ZROBIC
-                //idOstatniegoAdresata = dodajAdresata(adresaci, idZalogowanegoUzytkownika, idOstatniegoAdresata);
+                idOstatniegoAdresata = ksiazkaAdresowa.dodajAdresata(idZalogowanegoUzytkownika, idOstatniegoAdresata);
                 break;
             case '2':
                 //wyszukajAdresatowPoImieniu(adresaci);
@@ -59,7 +61,7 @@ int main()
                 //wyszukajAdresatowPoNazwisku(adresaci);
                 break;
             case '4': //TO ZROBIC
-                //wyswietlWszystkichAdresatow(adresaci);
+                ksiazkaAdresowa.wyswietlWszystkichAdresatow();
                 break;
             case '5':
                 //idUsunietegoAdresata = usunAdresata(adresaci);
