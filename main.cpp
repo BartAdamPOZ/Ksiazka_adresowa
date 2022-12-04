@@ -3,6 +3,8 @@
 
 #include "KsiazkaAdresowa.h"
 #include "MetodyPomocnicze.h"
+#include "AdresatMenedzer.h"
+#include "PlikZAdresatami.h"
 
 using namespace std;
 
@@ -11,7 +13,6 @@ int main()
     int idZalogowanegoUzytkownika = 0;
     char wybor;
     int idOstatniegoAdresata = 0;
-    vector <Adresat> adresaci;
 
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt");
 
@@ -19,7 +20,7 @@ int main()
     {
         if (idZalogowanegoUzytkownika == 0)
         {
-            wybor = ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
+            wybor = MetodyPomocnicze::wybierzOpcjeZMenuGlownego();
 
             switch (wybor)
             {
@@ -42,17 +43,19 @@ int main()
         {
            //if (adresaci.empty() == true)
 
-            /*idOstatniegoAdresata =*/ ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika, idOstatniegoAdresata);
-            ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+           //idOstatniegoAdresata = ksiazkaAdresowa.pobierzIdOstatniegoAdresata(); <<<< to zaraz
+
+            //ksiazkaAdresowa.wyswietlWszystkichAdresatow();
             //cout << "iD OSTATNIEGO ADRESATA TO : " << idOstatniegoAdresata << endl; // TU JEST PROBLEM
             //Sleep (2000);
+            AdresatMenedzer adresatMenedzer ("Adresaci.txt", idZalogowanegoUzytkownika);
 
-            wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
+            wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)
             {
             case '1': //TO ZROBIC
-                idOstatniegoAdresata = ksiazkaAdresowa.dodajAdresata(idZalogowanegoUzytkownika, idOstatniegoAdresata);
+                idOstatniegoAdresata = ksiazkaAdresowa.dodajAdresata();
                 break;
             case '2':
                 //wyszukajAdresatowPoImieniu(adresaci);

@@ -1,11 +1,10 @@
 #include "PlikZAdresatami.h"
 
-vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika, int idOstatniegoAdresata)
+vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika)
 {
     Adresat adresat;
-    AdresatMenedzer adresatMenedzer;
     vector <Adresat> adresaci;
-    //int idOstatniegoAdresata = 0;
+    int idOstatniegoAdresata = 0;
     string daneJednegoAdresataOddzielonePionowymiKreskami = "";
     string daneOstaniegoAdresataWPliku = "";
     fstream plikTekstowy;
@@ -18,15 +17,11 @@ vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(
         {
             if(idZalogowanegoUzytkownika == UzytkownikMenedzer::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami))
             {
-                adresat = adresatMenedzer.pobierzDaneAdresata(daneJednegoAdresataOddzielonePionowymiKreskami);
+                adresat = pobierzDaneAdresata(daneJednegoAdresataOddzielonePionowymiKreskami);
                 adresaci.push_back(adresat);
             }
         }
         daneOstaniegoAdresataWPliku = daneJednegoAdresataOddzielonePionowymiKreskami;
-        //cout << "Dane ostatniego adresata w pliku: " << daneOstaniegoAdresataWPliku << endl;
-        //Sleep (5000);
-       cout << "Aktualnie w wektorze adresaci znajduje sie : " << adresaci.size() << " adresatow." << endl;
-        Sleep(3000);
     }
 
 
@@ -37,13 +32,9 @@ vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(
 
     if (daneOstaniegoAdresataWPliku != "")
     {
-        idOstatniegoAdresata = adresatMenedzer.pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
-        //cout << "To jest id ostaniego adresata z metody pobierzIdAdresataZDanychOddzielonymiPionowymiKreskami w klasie PlikZAdresatami : " << idOstatniegoAdresata << endl;
-        //Sleep (5000);
+        idOstatniegoAdresata = pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneOstaniegoAdresataWPliku);
         return adresaci;
     }
-    /*else
-        return ;*/
 }
 
 void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat)
@@ -73,6 +64,77 @@ void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat)
     system("pause");
 }
 
+
+
+bool PlikZAdresatami::czyPlikJestPusty()
+{
+    fstream plikTekstowy;
+    plikTekstowy.seekg(0, ios::end);
+    if (plikTekstowy.tellg() == 0)
+        return true;
+    else
+        return false;
+}
+
+
+int PlikZAdresatami::pobierzIdOstatniegoAdresata()
+{
+    return idOstatniegoAdresata;
+}
+
+int PlikZAdresatami::pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami)
+{
+    int pozycjaRozpoczeciaIdAdresata = 0;
+    int idAdresata = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdAdresata));
+    return idAdresata;
+}
+
+Adresat PlikZAdresatami::pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami)
+{
+    Adresat adresat;
+    string pojedynczaDanaAdresata = "";
+    int numerPojedynczejDanejAdresata = 1;
+
+    for (int pozycjaZnaku = 0; pozycjaZnaku < daneAdresataOddzielonePionowymiKreskami.length(); pozycjaZnaku++)
+    {
+        if (daneAdresataOddzielonePionowymiKreskami[pozycjaZnaku] != '|')
+        {
+            pojedynczaDanaAdresata += daneAdresataOddzielonePionowymiKreskami[pozycjaZnaku];
+        }
+        else
+        {
+            switch(numerPojedynczejDanejAdresata)
+            {
+            case 1:
+                adresat.pobierzId() == atoi(pojedynczaDanaAdresata.c_str());
+                //cout << "ID adresata pobranego z pliku: " <<  adresat.pobierzId() << endl;
+                break;
+            case 2:
+                adresat.pobierzIdUzytkownika() == atoi(pojedynczaDanaAdresata.c_str());
+                break;
+            case 3:
+                adresat.pobierzImie() = pojedynczaDanaAdresata;
+                break;
+            case 4:
+                adresat.pobierzNazwisko() = pojedynczaDanaAdresata;
+                break;
+            case 5:
+                adresat.pobierzNumerTelefonu() = pojedynczaDanaAdresata;
+                break;
+            case 6:
+                adresat.pobierzEmail() = pojedynczaDanaAdresata;
+                break;
+            case 7:
+                adresat.pobierzAdres() = pojedynczaDanaAdresata;
+                break;
+            }
+            pojedynczaDanaAdresata = "";
+            numerPojedynczejDanejAdresata++;
+        }
+    }
+    return adresat;
+}
+
 string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat)
 {
     string liniaZDanymiAdresata = "";
@@ -86,46 +148,4 @@ string PlikZAdresatami::zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKre
     liniaZDanymiAdresata += adresat.pobierzAdres() + '|';
 
     return liniaZDanymiAdresata;
-}
-
-bool PlikZAdresatami::czyPlikJestPusty()
-{
-    fstream plikTekstowy;
-    plikTekstowy.seekg(0, ios::end);
-    if (plikTekstowy.tellg() == 0)
-        return true;
-    else
-        return false;
-}
-
-void PlikZAdresatami::wyswietlWszystkichAdresatow()
-{
-    system("cls");
-    cout << "Aktualnie w wektorze adresaci znajduje sie : " << adresaci.size() << " adresatow." << endl;
-    Sleep(3000);
-    if (adresaci.size() != 0)
-    {
-        cout << "             >>> ADRESACI <<<" << endl;
-        cout << "-----------------------------------------------" << endl;
-        for (vector <Adresat> :: iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
-        {
-            wyswietlDaneAdresata(*itr);
-        }
-        cout << endl;
-    }
-    else
-    {
-        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
-    }
-    system("pause");
-}
-
-void PlikZAdresatami::wyswietlDaneAdresata(Adresat adresat)
-{
-    cout << endl << "Id:                 " << adresat.pobierzId() << endl;
-    cout << "Imie:               " << adresat.pobierzImie() << endl;
-    cout << "Nazwisko:           " << adresat.pobierzNazwisko() << endl;
-    cout << "Numer telefonu:     " << adresat.pobierzNumerTelefonu() << endl;
-    cout << "Email:              " << adresat.pobierzEmail() << endl;
-    cout << "Adres:              " << adresat.pobierzAdres() << endl;
 }

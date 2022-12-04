@@ -8,29 +8,38 @@
 #include <sstream>
 #include <cstdlib>
 
+#include "AdresatMenedzer.h"
 #include "UzytkownikMenedzer.h"
 #include "Adresat.h"
-#include "AdresatMenedzer.h"
 #include "MetodyPomocnicze.h"
 
 using namespace std;
 
 class PlikZAdresatami
 {
-    string nazwaPlikuZAdresatami = "Adresaci.txt";
-    string nazwaTymczasowegoPlikuZAdresatami = "Adresaci_tymczasowo.txt";
+    int idOstatniegoAdresata;
+    const string nazwaPlikuZAdresatami;
+    //string nazwaTymczasowegoPlikuZAdresatami = "Adresaci_tymczasowo.txt";
     vector <Adresat> adresaci;
 
     string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
-    string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
+    int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
+
+    Adresat pobierzDaneAdresata(string daneAdresataOddzielonePionowymiKreskami);
     bool czyPlikJestPusty();
 
 public:
 
-    vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika, int idOstatniegoAdresata);
+    PlikZAdresatami(string NAZWAPLIKUZADRESATAMI) : nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI)
+    {
+        idOstatniegoAdresata = 0;
+    };
+
+
+    vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     void dopiszAdresataDoPliku(Adresat adresat);
-    void wyswietlWszystkichAdresatow();
-    void wyswietlDaneAdresata(Adresat adresat);
+    int pobierzIdOstatniegoAdresata();
+
 };
 
 #endif

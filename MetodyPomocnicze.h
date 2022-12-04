@@ -13,10 +13,10 @@ class MetodyPomocnicze
 public:
 
     static string wczytajLinie();
-    char wczytajZnak();
+    static char wczytajZnak();
     static string konwerjsaIntNaString(int liczba);
-    char wybierzOpcjeZMenuGlownego();
-    char wybierzOpcjeZMenuUzytkownika();
+    static char wybierzOpcjeZMenuGlownego();
+    static char wybierzOpcjeZMenuUzytkownika();
     static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
     static int konwersjaStringNaInt(string liczba);
     static string pobierzLiczbe(string tekst, int pozycjaZnaku);

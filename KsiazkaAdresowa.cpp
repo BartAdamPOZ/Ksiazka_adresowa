@@ -15,19 +15,9 @@ int KsiazkaAdresowa::logowanieUzytkownika()
     uzytkownikMenedzer.logowanieUzytkownika();
 }
 
-char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
-{
-    metodyPomocnicze.wybierzOpcjeZMenuGlownego();
-}
-
 void KsiazkaAdresowa::wczytajUzytkownikowZPliku()
 {
     uzytkownikMenedzer.wczytajUzytkownikowZPliku();
-}
-
-char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
-{
-    metodyPomocnicze.wybierzOpcjeZMenuUzytkownika();
 }
 
 void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika)
@@ -35,17 +25,17 @@ void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytk
     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
 }
 
-void KsiazkaAdresowa::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika, int idOstatniegoAdresata)
+void KsiazkaAdresowa::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika)
 {
-    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika, idOstatniegoAdresata);
+    plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
 }
 
-int KsiazkaAdresowa::dodajAdresata(int idZalogowanegoUzytkownika, int idOstatniegoAdresata)
+int KsiazkaAdresowa::dodajAdresata()
 {
-    adresatMenedzer.dodajAdresata(idZalogowanegoUzytkownika, idOstatniegoAdresata);
+    adresatMenedzer.dodajAdresata();
 }
 
 void KsiazkaAdresowa::wyswietlWszystkichAdresatow()
 {
-    plikZAdresatami.wyswietlWszystkichAdresatow();
+    adresatMenedzer.wyswietlWszystkichAdresatow();
 }
