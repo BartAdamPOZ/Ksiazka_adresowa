@@ -12,7 +12,7 @@ void UzytkownikMenedzer::rejestracjaUzytkownika()
     system("pause");
 }
 
-int UzytkownikMenedzer::logowanieUzytkownika()
+void UzytkownikMenedzer::logowanieUzytkownika()
 {
     Uzytkownik uzytkownik;
     string login = "", haslo = "";
@@ -33,17 +33,18 @@ int UzytkownikMenedzer::logowanieUzytkownika()
                 {
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
-                    return uzytkownicy[i].pobierzId();
+                    idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
+                    return;
                 }
             }
             cout << "Wprowadzono 3 razy bledne haslo." << endl;
             system("pause");
-            return 0;
+            return;
         }
     }
     cout << endl << "Bledny login, sprobuj ponownie. " << endl << endl;
     system("pause");
-    return 0;
+    return;
 }
 
 Uzytkownik UzytkownikMenedzer::podajDaneNowegoUzytkownika()
@@ -124,4 +125,14 @@ int UzytkownikMenedzer::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami
     int idUzytkownika = MetodyPomocnicze::konwersjaStringNaInt(MetodyPomocnicze::pobierzLiczbe(daneJednegoAdresataOddzielonePionowymiKreskami, pozycjaRozpoczeciaIdUzytkownika));
 
     return idUzytkownika;
+}
+
+bool UzytkownikMenedzer::isUserLoggedIn()
+{
+    return idZalogowanegoUzytkownika > 0;
+}
+
+int UzytkownikMenedzer::getIdZalogowanegoUzytkownika()
+{
+    return idZalogowanegoUzytkownika;
 }

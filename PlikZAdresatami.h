@@ -8,8 +8,6 @@
 #include <sstream>
 #include <cstdlib>
 
-#include "AdresatMenedzer.h"
-#include "UzytkownikMenedzer.h"
 #include "Adresat.h"
 #include "MetodyPomocnicze.h"
 
@@ -18,8 +16,7 @@ using namespace std;
 class PlikZAdresatami
 {
     int idOstatniegoAdresata;
-    const string nazwaPlikuZAdresatami;
-    //string nazwaTymczasowegoPlikuZAdresatami = "Adresaci_tymczasowo.txt";
+    const string NAZWA_PLIKU_Z_ADRESATAMI;
     vector <Adresat> adresaci;
 
     string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
@@ -30,7 +27,7 @@ class PlikZAdresatami
 
 public:
 
-    PlikZAdresatami(string NAZWAPLIKUZADRESATAMI) : nazwaPlikuZAdresatami(NAZWAPLIKUZADRESATAMI)
+    PlikZAdresatami(string nazwaPlikuZAdresatami) : NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
     {
         idOstatniegoAdresata = 0;
     };
@@ -38,7 +35,7 @@ public:
 
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
     void dopiszAdresataDoPliku(Adresat adresat);
-    int pobierzIdOstatniegoAdresata();
+    int getIdOstatniegoAdresata();
 
 };
 

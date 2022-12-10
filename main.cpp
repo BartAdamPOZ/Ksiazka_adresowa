@@ -14,7 +14,7 @@ int main()
     char wybor;
     int idOstatniegoAdresata = 0;
 
-    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt");
+    KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt");
 
     while (true)
     {
@@ -48,7 +48,6 @@ int main()
             //ksiazkaAdresowa.wyswietlWszystkichAdresatow();
             //cout << "iD OSTATNIEGO ADRESATA TO : " << idOstatniegoAdresata << endl; // TU JEST PROBLEM
             //Sleep (2000);
-            AdresatMenedzer adresatMenedzer ("Adresaci.txt", idZalogowanegoUzytkownika);
 
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
 

@@ -3,7 +3,7 @@
 int AdresatMenedzer::dodajAdresata()
 {
     Adresat adresat;
-    int idOstatniegoAdresata = plikZAdresatami.pobierzIdOstatniegoAdresata();
+    int idOstatniegoAdresata = plikZAdresatami.getIdOstatniegoAdresata();
 
     system("cls");
     cout << " >>> DODAWANIE NOWEGO ADRESATA <<<" << endl << endl;
@@ -19,9 +19,9 @@ int AdresatMenedzer::dodajAdresata()
 Adresat AdresatMenedzer::podajDaneNowegoAdresata()
 {
     Adresat adresat;
-    int idOstatniegoAdresata = plikZAdresatami.pobierzIdOstatniegoAdresata();
+    int idOstatniegoAdresata = plikZAdresatami.getIdOstatniegoAdresata();
     adresat.ustawId(++idOstatniegoAdresata);
-    adresat.ustawIdUzytkownika(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+    adresat.ustawIdUzytkownika(idZalogowanegoUzytkownika);
 
     /*cout << "ID nastepnego adresata : " << adresat.pobierzId() << endl;
     cout << "ID zalogowanego uzytkownika : " << adresat.pobierzIdUzytkownika() << endl;
@@ -80,3 +80,7 @@ void AdresatMenedzer::wyswietlWszystkichAdresatow()
     system("pause");
 }
 
+void AdresatMenedzer::setIdZalogowanegoUzytkownika(int idZalogowanegoUzytkownika)
+{
+    this->idZalogowanegoUzytkownika = idZalogowanegoUzytkownika;
+}
