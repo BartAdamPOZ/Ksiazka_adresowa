@@ -9,8 +9,7 @@
 
 using namespace std;
 
-class Adresat
-{
+class Adresat {
     int id = 0, idUzytkownika = 0;
     string imie = "", nazwisko = "", numerTelefonu = "", email = "", adres = "";
 

@@ -8,22 +8,18 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     int idZalogowanegoUzytkownika = 0;
     char wybor;
     int idOstatniegoAdresata = 0;
 
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt");
 
-    while (true)
-    {
-        if (idZalogowanegoUzytkownika == 0)
-        {
+    while (true) {
+        if (idZalogowanegoUzytkownika == 0) {
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuGlownego();
 
-            switch (wybor)
-            {
+            switch (wybor) {
             case '1':
                 ksiazkaAdresowa.rejestracjaUzytkownika();
                 break;
@@ -38,21 +34,12 @@ int main()
                 system("pause");
                 break;
             }
-        }
-        else
-        {
-           //if (adresaci.empty() == true)
-
-           //idOstatniegoAdresata = ksiazkaAdresowa.pobierzIdOstatniegoAdresata(); <<<< to zaraz
-
-            //ksiazkaAdresowa.wyswietlWszystkichAdresatow();
-            //cout << "iD OSTATNIEGO ADRESATA TO : " << idOstatniegoAdresata << endl; // TU JEST PROBLEM
-            //Sleep (2000);
+        } else {
+            idOstatniegoAdresata = ksiazkaAdresowa.getIdOstatniegoAdresata();
 
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
 
-            switch (wybor)
-            {
+            switch (wybor) {
             case '1': //TO ZROBIC
                 idOstatniegoAdresata = ksiazkaAdresowa.dodajAdresata();
                 break;

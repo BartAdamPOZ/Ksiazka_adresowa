@@ -9,13 +9,13 @@
 
 #include "Uzytkownik.h"
 #include "PlikZUzytkownikami.h"
+#include "Adresat.h"
 
 
 using namespace std;
 
-class UzytkownikMenedzer
-{
-    int idZalogowanegoUzytkownika;
+class UzytkownikMenedzer {
+    int idZalogowanegoUzytkownika = 0;
     vector <Uzytkownik> uzytkownicy;
 
     Uzytkownik podajDaneNowegoUzytkownika();
