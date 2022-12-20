@@ -66,15 +66,20 @@ void AdresatMenedzer::wyswietlWszystkichAdresatow() {
     system("pause");
 }
 
-int AdresatMenedzer::setIdZalogowanegoUzytkownika(int idZalogowanegoUzytkownika) {
+void AdresatMenedzer::setIdZalogowanegoUzytkownika(int idZalogowanegoUzytkownika) {
     this->idZalogowanegoUzytkownika = idZalogowanegoUzytkownika;
+}
+
+int AdresatMenedzer::getIdZalogowanegoUzytkownika()
+{
     return idZalogowanegoUzytkownika;
 }
 
 void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika) {
+    plikZAdresatami.setIdZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
     adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
 }
 
 int AdresatMenedzer::getIdOstatniegoAdresata() {
-    plikZAdresatami.getIdOstatniegoAdresata();
+    return plikZAdresatami.getIdOstatniegoAdresata();
 }

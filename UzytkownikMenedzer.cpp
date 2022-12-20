@@ -18,7 +18,7 @@ void UzytkownikMenedzer::logowanieUzytkownika() {
     cout << endl << "Podaj login: ";
     login = MetodyPomocnicze::wczytajLinie();
 
-    for(int i = 0; i < uzytkownicy.size(); i++) {
+    for(unsigned int i = 0; i < uzytkownicy.size(); i++) {
         if (uzytkownicy[i].pobierzLogin() == login) {
             for (int iloscProb = 3; iloscProb > 0; iloscProb--) {
                 cout << "Podaj haslo. Pozostalo prob: " << iloscProb << ": ";
@@ -65,7 +65,7 @@ int UzytkownikMenedzer::pobierzIdNowegoUzytkownika() {
 }
 
 bool UzytkownikMenedzer::czyIstniejeLogin(string login) {
-    for(int i = 0; i < uzytkownicy.size(); i++) {
+    for(unsigned int i = 0; i < uzytkownicy.size(); i++) {
         if (uzytkownicy[i].pobierzLogin() == login) {
             cout << endl << "Istnieje uzytkownik o takim loginie." << endl;
             return true;
@@ -75,7 +75,7 @@ bool UzytkownikMenedzer::czyIstniejeLogin(string login) {
 }
 
 void UzytkownikMenedzer::wypiszWszystkichUzytkownikow() {
-    for(int i = 0; i < uzytkownicy.size(); i++) {
+    for(unsigned int i = 0; i < uzytkownicy.size(); i++) {
         cout << uzytkownicy[i].pobierzId() << endl;
         cout << uzytkownicy[i].pobierzLogin() << endl;
         cout << uzytkownicy[i].pobierzHaslo() << endl;
@@ -86,11 +86,11 @@ void UzytkownikMenedzer::wczytajUzytkownikowZPliku() {
     uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku();
 }
 
-void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika) {
+void UzytkownikMenedzer::zmianaHaslaZalogowanegoUzytkownika() {
     string noweHaslo = "";
     cout << "Podaj nowe haslo: ";
 
-    for (int i = 0; i < uzytkownicy.size(); i++) {
+    for (unsigned int i = 0; i < uzytkownicy.size(); i++) {
         if (uzytkownicy[i].pobierzId() == idZalogowanegoUzytkownika) {
             uzytkownicy[i].ustawHaslo(MetodyPomocnicze::wczytajLinie());
 
@@ -107,10 +107,15 @@ int UzytkownikMenedzer::pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami
     return idUzytkownika;
 }
 
-bool UzytkownikMenedzer::isUserLoggedIn() {
+bool UzytkownikMenedzer::czyUzytkownikJestZalogowany() {
     return idZalogowanegoUzytkownika > 0;
 }
 
 int UzytkownikMenedzer::getIdZalogowanegoUzytkownika() {
     return idZalogowanegoUzytkownika;
+}
+
+int UzytkownikMenedzer::wyloguj()
+{
+    return idZalogowanegoUzytkownika = 0;
 }

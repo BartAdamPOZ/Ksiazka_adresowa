@@ -9,14 +9,13 @@
 using namespace std;
 
 int main() {
-    int idZalogowanegoUzytkownika = 0;
-    char wybor;
-    int idOstatniegoAdresata = 0;
+
+     char wybor;
 
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt");
 
     while (true) {
-        if (idZalogowanegoUzytkownika == 0) {
+        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany()) {
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuGlownego();
 
             switch (wybor) {
@@ -24,7 +23,7 @@ int main() {
                 ksiazkaAdresowa.rejestracjaUzytkownika();
                 break;
             case '2':
-                idZalogowanegoUzytkownika = ksiazkaAdresowa.logowanieUzytkownika();
+                ksiazkaAdresowa.logowanieUzytkownika();
                 break;
             case '9':
                 exit(0);
@@ -35,13 +34,12 @@ int main() {
                 break;
             }
         } else {
-            idOstatniegoAdresata = ksiazkaAdresowa.getIdOstatniegoAdresata();
 
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor) {
             case '1': //TO ZROBIC
-                idOstatniegoAdresata = ksiazkaAdresowa.dodajAdresata();
+                ksiazkaAdresowa.dodajAdresata();
                 break;
             case '2':
                 //wyszukajAdresatowPoImieniu(adresaci);
@@ -60,11 +58,11 @@ int main() {
                 //edytujAdresata(adresaci);
                 break;
             case '7': //TO ZROBIC
-                ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+                ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
                 break;
             case '8': //TO ZROBIC
-                idZalogowanegoUzytkownika = 0;
                 //adresaci.clear();
+                ksiazkaAdresowa.wyloguj();
                 break;
             }
         }

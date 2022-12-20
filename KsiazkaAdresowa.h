@@ -23,14 +23,14 @@ public:
         uzytkownikMenedzer.wczytajUzytkownikowZPliku();
     };
     void rejestracjaUzytkownika();
-    int logowanieUzytkownika();
+    void logowanieUzytkownika();
     void wczytajUzytkownikowZPliku();
     void wypiszWszystkichUzytkownikow();
-    void zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
-    void wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
-    int dodajAdresata();
+    void zmianaHaslaZalogowanegoUzytkownika();
+    void dodajAdresata();
     void wyswietlWszystkichAdresatow();
-    int getIdOstatniegoAdresata();
+    bool czyUzytkownikJestZalogowany();
+    bool wyloguj();
 };
 
 #endif

@@ -8,24 +8,23 @@ void KsiazkaAdresowa::wypiszWszystkichUzytkownikow() {
     uzytkownikMenedzer.wypiszWszystkichUzytkownikow();
 }
 
-int KsiazkaAdresowa::logowanieUzytkownika() {
+void KsiazkaAdresowa::logowanieUzytkownika() {
     uzytkownikMenedzer.logowanieUzytkownika();
-    if (uzytkownikMenedzer.isUserLoggedIn()) {
-        idZalogowanegoUzytkownika = adresatMenedzer.setIdZalogowanegoUzytkownika(uzytkownikMenedzer.getIdZalogowanegoUzytkownika());
-        wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+    if (uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
+        adresatMenedzer.setIdZalogowanegoUzytkownika(uzytkownikMenedzer.getIdZalogowanegoUzytkownika());
+        adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(uzytkownikMenedzer.getIdZalogowanegoUzytkownika());
     }
-    return idZalogowanegoUzytkownika;
 }
 
 void KsiazkaAdresowa::wczytajUzytkownikowZPliku() {
     uzytkownikMenedzer.wczytajUzytkownikowZPliku();
 }
 
-void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika) {
-    uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
+void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika() {
+    uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
 }
 
-int KsiazkaAdresowa::dodajAdresata() {
+void KsiazkaAdresowa::dodajAdresata() {
     adresatMenedzer.dodajAdresata();
 }
 
@@ -33,10 +32,12 @@ void KsiazkaAdresowa::wyswietlWszystkichAdresatow() {
     adresatMenedzer.wyswietlWszystkichAdresatow();
 }
 
-void KsiazkaAdresowa::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika) {
-    adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
+bool KsiazkaAdresowa::czyUzytkownikJestZalogowany()
+{
+    return uzytkownikMenedzer.czyUzytkownikJestZalogowany();
 }
 
-int KsiazkaAdresowa::getIdOstatniegoAdresata() {
-    adresatMenedzer.getIdOstatniegoAdresata();
+bool KsiazkaAdresowa::wyloguj()
+{
+    return uzytkownikMenedzer.wyloguj();
 }

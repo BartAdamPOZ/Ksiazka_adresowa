@@ -29,10 +29,11 @@ public:
     void logowanieUzytkownika();
     void wypiszWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
-    void zmianaHaslaZalogowanegoUzytkownika(int idZalogowanegoUzytkownika);
+    void zmianaHaslaZalogowanegoUzytkownika();
     static int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
-    bool isUserLoggedIn();
+    bool czyUzytkownikJestZalogowany();
     int getIdZalogowanegoUzytkownika();
+    int wyloguj();
 };
 
 #endif
