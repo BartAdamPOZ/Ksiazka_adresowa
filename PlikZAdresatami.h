@@ -32,7 +32,7 @@ public:
 
 
     vector <Adresat> wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika);
-    void dopiszAdresataDoPliku(Adresat adresat);
+    bool dopiszAdresataDoPliku(Adresat adresat);
     int getIdOstatniegoAdresata();
     void setIdZalogowanegoUzytkownika (int idZalogowanegoUzytkownika);
     int getIdZalogowanegoUzytkownika();

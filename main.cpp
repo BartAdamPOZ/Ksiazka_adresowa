@@ -38,7 +38,7 @@ int main() {
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor) {
-            case '1': //TO ZROBIC
+            case '1':
                 ksiazkaAdresowa.dodajAdresata();
                 break;
             case '2':
@@ -47,7 +47,7 @@ int main() {
             case '3':
                 //wyszukajAdresatowPoNazwisku(adresaci);
                 break;
-            case '4': //TO ZROBIC
+            case '4':
                 ksiazkaAdresowa.wyswietlWszystkichAdresatow();
                 break;
             case '5':
@@ -57,10 +57,10 @@ int main() {
             case '6':
                 //edytujAdresata(adresaci);
                 break;
-            case '7': //TO ZROBIC
+            case '7':
                 ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
                 break;
-            case '8': //TO ZROBIC
+            case '8':
                 //adresaci.clear();
                 ksiazkaAdresowa.wyloguj();
                 break;

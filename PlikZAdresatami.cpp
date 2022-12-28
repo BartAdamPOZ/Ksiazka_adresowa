@@ -30,7 +30,7 @@ vector <Adresat> PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(
     return adresaci;
 }
 
-void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat) {
+bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat) {
     string liniaZDanymiAdresata = "";
     plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::out | ios::app);
 
@@ -42,12 +42,11 @@ void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat) {
         } else {
             plikTekstowy << endl << liniaZDanymiAdresata ;
         }
-    } else {
-        cout << "Nie udalo sie otworzyc pliku i zapisac w nim danych." << endl;
+        idOstatniegoAdresata++;
+        plikTekstowy.close();
+        return true;
     }
-    plikTekstowy.close();
-    system("pause");
-    idOstatniegoAdresata++;
+    return false;
 }
 
 
