@@ -13,11 +13,14 @@
 
 using namespace std;
 
-class PlikZAdresatami {
+class PlikZAdresatami
+{
     int idOstatniegoAdresata;
     int idZalogowanegoUzytkownika;
+    int idUsuwanegoAdresata;
     fstream plikTekstowy;
     const string NAZWA_PLIKU_Z_ADRESATAMI;
+    string nazwaTymczasowegoPlikuZAdresatami = "Adresaci_tymczasowy.txt";
     string zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(Adresat adresat);
     int pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
 
@@ -26,7 +29,8 @@ class PlikZAdresatami {
 
 public:
 
-    PlikZAdresatami(string nazwaPlikuZAdresatami) : NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami) {
+    PlikZAdresatami(string nazwaPlikuZAdresatami) : NAZWA_PLIKU_Z_ADRESATAMI(nazwaPlikuZAdresatami)
+    {
         idOstatniegoAdresata = 0;
     };
 
@@ -35,7 +39,9 @@ public:
     bool dopiszAdresataDoPliku(Adresat adresat);
     int getIdOstatniegoAdresata();
     void setIdZalogowanegoUzytkownika (int idZalogowanegoUzytkownika);
+    void setIdUsuwanegoAdresata (int idUsuwanegoAdresata);
     int getIdZalogowanegoUzytkownika();
+    void usunWybranaLinieWPliku(int idUsuwanegoAdresata);
 };
 
 #endif

@@ -8,17 +8,21 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
 
-     char wybor;
+    char wybor;
 
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt");
 
-    while (true) {
-        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany()) {
+    while (true)
+    {
+        if (!ksiazkaAdresowa.czyUzytkownikJestZalogowany())
+        {
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuGlownego();
 
-            switch (wybor) {
+            switch (wybor)
+            {
             case '1':
                 ksiazkaAdresowa.rejestracjaUzytkownika();
                 break;
@@ -33,11 +37,14 @@ int main() {
                 system("pause");
                 break;
             }
-        } else {
+        }
+        else
+        {
 
             wybor = MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika();
 
-            switch (wybor) {
+            switch (wybor)
+            {
             case '1':
                 ksiazkaAdresowa.dodajAdresata();
                 break;
@@ -51,8 +58,7 @@ int main() {
                 ksiazkaAdresowa.wyswietlWszystkichAdresatow();
                 break;
             case '5':
-                //idUsunietegoAdresata = usunAdresata(adresaci);
-                //idOstatniegoAdresata = podajIdOstatniegoAdresataPoUsunieciuWybranegoAdresata(idUsunietegoAdresata, idOstatniegoAdresata);
+                ksiazkaAdresowa.usunAdresata();
                 break;
             case '6':
                 //edytujAdresata(adresaci);
@@ -61,7 +67,6 @@ int main() {
                 ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
                 break;
             case '8':
-                //adresaci.clear();
                 ksiazkaAdresowa.wyloguj();
                 break;
             }

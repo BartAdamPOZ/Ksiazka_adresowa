@@ -1,35 +1,41 @@
 #include "KsiazkaAdresowa.h"
 
-void KsiazkaAdresowa::rejestracjaUzytkownika() {
+void KsiazkaAdresowa::rejestracjaUzytkownika()
+{
     uzytkownikMenedzer.rejestracjaUzytkownika();
 }
 
-void KsiazkaAdresowa::wypiszWszystkichUzytkownikow() {
+void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
+{
     uzytkownikMenedzer.wypiszWszystkichUzytkownikow();
 }
 
-void KsiazkaAdresowa::logowanieUzytkownika() {
+void KsiazkaAdresowa::logowanieUzytkownika()
+{
     uzytkownikMenedzer.logowanieUzytkownika();
-    if (uzytkownikMenedzer.czyUzytkownikJestZalogowany()) {
-        //adresatMenedzer.setIdZalogowanegoUzytkownika(uzytkownikMenedzer.getIdZalogowanegoUzytkownika());
-        //adresatMenedzer.wczytajAdresatowZalogowanegoUzytkownikaZPliku(uzytkownikMenedzer.getIdZalogowanegoUzytkownika());
+    if (uzytkownikMenedzer.czyUzytkownikJestZalogowany())
+    {
         adresatMenedzer = new AdresatMenedzer(NAZWA_PLIKU_Z_ADRESATAMI, uzytkownikMenedzer.getIdZalogowanegoUzytkownika());
     }
 }
 
-void KsiazkaAdresowa::wczytajUzytkownikowZPliku() {
+void KsiazkaAdresowa::wczytajUzytkownikowZPliku()
+{
     uzytkownikMenedzer.wczytajUzytkownikowZPliku();
 }
 
-void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika() {
+void KsiazkaAdresowa::zmianaHaslaZalogowanegoUzytkownika()
+{
     uzytkownikMenedzer.zmianaHaslaZalogowanegoUzytkownika();
 }
 
-void KsiazkaAdresowa::dodajAdresata() {
+void KsiazkaAdresowa::dodajAdresata()
+{
     adresatMenedzer->dodajAdresata();
 }
 
-void KsiazkaAdresowa::wyswietlWszystkichAdresatow() {
+void KsiazkaAdresowa::wyswietlWszystkichAdresatow()
+{
     adresatMenedzer->wyswietlWszystkichAdresatow();
 }
 
@@ -43,4 +49,9 @@ void KsiazkaAdresowa::wyloguj()
     uzytkownikMenedzer.wyloguj();
     delete adresatMenedzer;
     adresatMenedzer = NULL;
+}
+
+void KsiazkaAdresowa::usunAdresata()
+{
+    adresatMenedzer->usunAdresata();
 }

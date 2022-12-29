@@ -1,6 +1,7 @@
 #include "AdresatMenedzer.h"
 
-void AdresatMenedzer::dodajAdresata() {
+void AdresatMenedzer::dodajAdresata()
+{
     Adresat adresat;
 
     system("cls");
@@ -16,7 +17,8 @@ void AdresatMenedzer::dodajAdresata() {
     system("pause");
 }
 
-Adresat AdresatMenedzer::podajDaneNowegoAdresata() {
+Adresat AdresatMenedzer::podajDaneNowegoAdresata()
+{
     Adresat adresat;
 
     string imie, nazwisko, numerTelefonu, email, adres;
@@ -52,7 +54,8 @@ Adresat AdresatMenedzer::podajDaneNowegoAdresata() {
 }
 
 
-void AdresatMenedzer::wyswietlDaneAdresata(Adresat adresat) {
+void AdresatMenedzer::wyswietlDaneAdresata(Adresat adresat)
+{
     cout << endl << "Id:                 " << adresat.pobierzId() << endl;
     cout << "Imie:               " << adresat.pobierzImie() << endl;
     cout << "Nazwisko:           " << adresat.pobierzNazwisko() << endl;
@@ -61,35 +64,77 @@ void AdresatMenedzer::wyswietlDaneAdresata(Adresat adresat) {
     cout << "Adres:              " << adresat.pobierzAdres() << endl;
 }
 
-void AdresatMenedzer::wyswietlWszystkichAdresatow() {
+void AdresatMenedzer::wyswietlWszystkichAdresatow()
+{
     system("cls");
-    if (adresaci.size() != 0) {
+    if (adresaci.size() != 0)
+    {
         cout << "             >>> ADRESACI <<<" << endl;
         cout << "-----------------------------------------------" << endl;
-        for (vector <Adresat> :: iterator itr = adresaci.begin(); itr != adresaci.end(); itr++) {
+        for (vector <Adresat> :: iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
+        {
             wyswietlDaneAdresata(*itr);
         }
         cout << endl;
-    } else {
+    }
+    else
+    {
         cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
     }
     system("pause");
 }
 
-/*void AdresatMenedzer::setIdZalogowanegoUzytkownika(int idZalogowanegoUzytkownika) {
-    this->idZalogowanegoUzytkownika = idZalogowanegoUzytkownika;
-}*/
-
-/*int AdresatMenedzer::getIdZalogowanegoUzytkownika()
+int AdresatMenedzer::usunAdresata()
 {
-    return idZalogowanegoUzytkownika;
-}*/
+    Adresat adresat;
 
-/*void AdresatMenedzer::wczytajAdresatowZalogowanegoUzytkownikaZPliku(int idZalogowanegoUzytkownika) {
-    plikZAdresatami.setIdZalogowanegoUzytkownika(idZalogowanegoUzytkownika);
-    adresaci = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(idZalogowanegoUzytkownika);
-}*/
+    int idUsuwanegoAdresata = 0;
 
-/*int AdresatMenedzer::getIdOstatniegoAdresata() {
-    return plikZAdresatami.getIdOstatniegoAdresata();
-}*/
+    system("cls");
+    cout << ">>> USUWANIE WYBRANEGO ADRESATA <<<" << endl << endl;
+    idUsuwanegoAdresata = podajIdWybranegoAdresata();
+
+    char znak;
+    bool czyIstniejeAdresat = false;
+
+    for (unsigned int i = 0; i < adresaci.size(); i++)
+    {
+        if (adresaci[i].pobierzId() == idUsuwanegoAdresata)
+        {
+            czyIstniejeAdresat = true;
+            cout << endl << "Potwierdz naciskajac klawisz 't': ";
+            znak = MetodyPomocnicze::wczytajZnak();
+            if (znak == 't')
+            {
+                plikZAdresatami.usunWybranaLinieWPliku(idUsuwanegoAdresata);
+                adresaci.erase(adresaci.begin()+i);
+                cout << endl << endl << "Szukany adresat zostal USUNIETY" << endl << endl;
+                system("pause");
+                return 0;
+            }
+            else
+            {
+                cout << endl << endl << "Wybrany adresat NIE zostal usuniety" << endl << endl;
+                system("pause");
+                return 0;
+            }
+        }
+    }
+    if (czyIstniejeAdresat == false)
+    {
+        cout << endl << "Nie ma takiego adresata w ksiazce adresowej" << endl << endl;
+        system("pause");
+    }
+    return 0;
+
+
+}
+
+int AdresatMenedzer::podajIdWybranegoAdresata()
+{
+    int idWybranegoAdresata = 0;
+    cout << "Podaj numer ID Adresata: ";
+    idWybranegoAdresata  = MetodyPomocnicze::wczytajLiczbeCalkowita();
+    return idWybranegoAdresata;
+}
+

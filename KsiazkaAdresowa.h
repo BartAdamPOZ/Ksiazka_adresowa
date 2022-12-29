@@ -14,7 +14,8 @@
 
 using namespace std;
 
-class KsiazkaAdresowa {
+class KsiazkaAdresowa
+{
     UzytkownikMenedzer uzytkownikMenedzer;
     AdresatMenedzer *adresatMenedzer;
     const string NAZWA_PLIKU_Z_ADRESATAMI;
@@ -39,6 +40,7 @@ public:
     void wyswietlWszystkichAdresatow();
     bool czyUzytkownikJestZalogowany();
     void wyloguj();
+    void usunAdresata();
 };
 
 #endif

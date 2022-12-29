@@ -13,7 +13,8 @@
 
 using namespace std;
 
-class PlikZUzytkownikami {
+class PlikZUzytkownikami
+{
     const string nazwaPlikuZUzytkownikami;
     fstream plikTekstowy;
     string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);

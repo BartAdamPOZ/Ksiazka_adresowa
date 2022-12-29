@@ -62,7 +62,7 @@ char MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika()
     cout << "2. Wyszukaj po imieniu - dostepne wkrotce" << endl;
     cout << "3. Wyszukaj po nazwisku - dostepne wkrotce " << endl;
     cout << "4. Wyswietl adresatow" << endl;
-    cout << "5. Usun adresata - dostepne wkrotce " << endl;
+    cout << "5. Usun adresata - JUZ DOSTEPNA! " << endl;
     cout << "6. Edytuj adresata - dostepne wkrotce " << endl;
     cout << "---------------------------" << endl;
     cout << "7. Zmien haslo" << endl;
@@ -104,4 +104,33 @@ string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku)
     return liczba;
 }
 
+int MetodyPomocnicze::wczytajLiczbeCalkowita()
+{
+    string wejscie = "";
+    int liczba = 0;
 
+    while (true)
+    {
+        getline(cin, wejscie);
+
+        stringstream myStream(wejscie);
+        if (myStream >> liczba)
+            break;
+        cout << "To nie jest liczba. Wpisz ponownie. " << endl;
+    }
+    return liczba;
+}
+
+void MetodyPomocnicze::usunPlik(string nazwaPlikuZRozszerzeniem)
+{
+    if (remove(nazwaPlikuZRozszerzeniem.c_str()) == 0) {}
+    else
+        cout << "Nie udalo sie usunac pliku " << nazwaPlikuZRozszerzeniem << endl;
+}
+
+void MetodyPomocnicze::zmienNazwePliku(string staraNazwa, string nowaNazwa)
+{
+    if (rename(staraNazwa.c_str(), nowaNazwa.c_str()) == 0) {}
+    else
+        cout << "Nazwa pliku nie zostala zmieniona." << staraNazwa << endl;
+}

@@ -14,7 +14,8 @@
 
 using namespace std;
 
-class UzytkownikMenedzer {
+class UzytkownikMenedzer
+{
     int idZalogowanegoUzytkownika = 0;
     vector <Uzytkownik> uzytkownicy;
 
