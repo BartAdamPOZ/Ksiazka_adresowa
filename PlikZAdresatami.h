@@ -42,8 +42,6 @@ public:
     void setIdZalogowanegoUzytkownika (int idZalogowanegoUzytkownika);
     void setIdUsuwanegoAdresata (int idUsuwanegoAdresata);
     void usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
-    void zaktualizujDaneWybranegoAdresata(Adresat adresat);
-    //int zwrocNumerLiniiSzukanegoAdresata(Adresat adresat);
     void edytujWybranaLinieWPliku(Adresat adresat);
 };
 

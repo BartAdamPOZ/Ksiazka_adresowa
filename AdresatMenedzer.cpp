@@ -147,30 +147,29 @@ void AdresatMenedzer::edytujAdresata()
             {
             case '1':
                 cout << "Podaj nowe imie: ";
-                adresaci[i].pobierzImie() = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].ustawImie(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzImie()));
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresat);
+
+                adresaci[i].ustawImie(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(MetodyPomocnicze::wczytajLinie()));
+                plikZAdresatami.edytujWybranaLinieWPliku(adresaci[i]);
                 break;
             case '2':
                 cout << "Podaj nowe nazwisko: ";
-                adresaci[i].pobierzNazwisko() = MetodyPomocnicze::wczytajLinie();
-                adresaci[i].ustawNazwisko(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(adresaci[i].pobierzNazwisko()));
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresat);
+                adresaci[i].ustawNazwisko(MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(MetodyPomocnicze::wczytajLinie()));
+                plikZAdresatami.edytujWybranaLinieWPliku(adresaci[i]);
                 break;
             case '3':
                 cout << "Podaj nowy numer telefonu: ";
                 adresaci[i].ustawNumerTelefonu(MetodyPomocnicze::wczytajLinie());
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresat);
+                plikZAdresatami.edytujWybranaLinieWPliku(adresaci[i]);
                 break;
             case '4':
                 cout << "Podaj nowy email: ";
                 adresaci[i].ustawEmail(MetodyPomocnicze::wczytajLinie());
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresat);
+                plikZAdresatami.edytujWybranaLinieWPliku(adresaci[i]);
                 break;
             case '5':
                 cout << "Podaj nowy adres zamieszkania: ";
-                adresaci[i].pobierzAdres() = MetodyPomocnicze::wczytajLinie();
-                plikZAdresatami.zaktualizujDaneWybranegoAdresata(adresat);
+                adresaci[i].ustawAdres(MetodyPomocnicze::wczytajLinie());
+                plikZAdresatami.edytujWybranaLinieWPliku(adresaci[i]);
                 break;
             case '6':
                 cout << endl << "Powrot do menu uzytkownika" << endl << endl;
