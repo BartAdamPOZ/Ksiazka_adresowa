@@ -18,6 +18,7 @@ class PlikZAdresatami
     int idOstatniegoAdresata;
     int idZalogowanegoUzytkownika;
     int idUsuwanegoAdresata;
+    int idEdytowanegoAdresata;
     fstream plikTekstowy;
     const string NAZWA_PLIKU_Z_ADRESATAMI;
     string nazwaTymczasowegoPlikuZAdresatami = "Adresaci_tymczasowy.txt";
@@ -40,8 +41,10 @@ public:
     int getIdOstatniegoAdresata();
     void setIdZalogowanegoUzytkownika (int idZalogowanegoUzytkownika);
     void setIdUsuwanegoAdresata (int idUsuwanegoAdresata);
-    int getIdZalogowanegoUzytkownika();
-    void usunWybranaLinieWPliku(int idUsuwanegoAdresata);
+    void usunWybranegoAdresataZPliku(int idUsuwanegoAdresata);
+    void zaktualizujDaneWybranegoAdresata(Adresat adresat);
+    //int zwrocNumerLiniiSzukanegoAdresata(Adresat adresat);
+    void edytujWybranaLinieWPliku(Adresat adresat);
 };
 
 #endif

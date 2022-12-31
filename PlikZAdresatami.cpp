@@ -154,14 +154,8 @@ void PlikZAdresatami::setIdUsuwanegoAdresata(int idUsuwanegoAdresata)
     this->idUsuwanegoAdresata = idUsuwanegoAdresata;
 }
 
-int PlikZAdresatami::getIdZalogowanegoUzytkownika()
-{
-    return idZalogowanegoUzytkownika;
-}
 
-
-
-void PlikZAdresatami::usunWybranaLinieWPliku(int idUsuwanegoAdresata)
+void PlikZAdresatami::usunWybranegoAdresataZPliku(int idUsuwanegoAdresata)
 {
     bool czyIstniejeAdresat = false;
 
@@ -205,6 +199,102 @@ void PlikZAdresatami::usunWybranaLinieWPliku(int idUsuwanegoAdresata)
 
     }
 
+    if (czyIstniejeAdresat == false)
+    {
+        plikTekstowy.close();
+        tymczasowyPlikTekstowy.close();
+    }
+}
+
+void PlikZAdresatami::zaktualizujDaneWybranegoAdresata(Adresat adresat)
+{
+    //int numerLiniiEdytowanegoAdresata = 0;
+    //string liniaZDanymiAdresata = "";
+
+    //numerLiniiEdytowanegoAdresata = zwrocNumerLiniiSzukanegoAdresata(adresat);
+    //liniaZDanymiAdresata = zamienDaneAdresataNaLinieZDanymiOddzielonymiPionowymiKreskami(adresat);
+    edytujWybranaLinieWPliku(adresat);
+
+    cout << endl << "Dane zostaly zaktualizowane." << endl << endl;
+}
+
+/*int PlikZAdresatami::zwrocNumerLiniiSzukanegoAdresata(Adresat adresat)
+{
+    //bool czyIstniejeAdresat = false;
+    //int numerLiniiEdytowanegoAdresata = 0;
+    //string liniaZDanymiAdresata = ""; // TO TO SAMO CO liniaZDanymiAdresataOddzielonePionowymiKreskami
+    //int numerLiniiWPlikuTekstowym = 1; // to to samo co numerWczytanejLinii
+    //string daneJednegoAdresataOddzielonePionowymiKreskami = ""; // to to samo co wczytanaLinia
+    //plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::in);
+
+    //if (plikTekstowy.good() == true && adresat.pobierzId() <= idOstatniegoAdresata)
+   // {
+        while(getline(plikTekstowy, daneJednegoAdresataOddzielonePionowymiKreskami))
+        {
+            if(adresat.pobierzId() == pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(daneJednegoAdresataOddzielonePionowymiKreskami))
+            {
+                czyIstniejeAdresat = true;
+                //plikTekstowy.close();
+                numerLiniiEdytowanegoAdresata = numerLiniiWPlikuTekstowym;
+            }
+            else
+                numerLiniiWPlikuTekstowym++;
+        }
+        if (czyIstniejeAdresat = false)
+        {
+            plikTekstowy.close();
+            return 0;
+        }
+    }
+    return 0;
+}*/
+
+void PlikZAdresatami::edytujWybranaLinieWPliku(Adresat adresat)
+{
+    bool czyIstniejeAdresat = false;
+    int numerLiniiEdytowanegoAdresata = 0;
+    string liniaZDanymiAdresataOddzielonePionowymiKreskami = "";
+
+    fstream tymczasowyPlikTekstowy;
+    string wczytanaLinia = "";
+    int numerWczytanejLinii = 1;
+// -------------------------------------------
+    plikTekstowy.open(NAZWA_PLIKU_Z_ADRESATAMI.c_str(), ios::in);
+    tymczasowyPlikTekstowy.open(nazwaTymczasowegoPlikuZAdresatami.c_str(), ios::out | ios::app);
+
+    if (plikTekstowy.good() == true && adresat.pobierzId() <= idOstatniegoAdresata)
+    {
+        while (getline(plikTekstowy, wczytanaLinia))
+        {
+            if(adresat.pobierzId() == pobierzIdAdresataZDanychOddzielonychPionowymiKreskami(wczytanaLinia))
+            {
+                czyIstniejeAdresat = true;
+                numerLiniiEdytowanegoAdresata = numerWczytanejLinii;
+            }
+            else {}
+
+            if (numerWczytanejLinii == numerLiniiEdytowanegoAdresata)
+            {
+                if (numerWczytanejLinii == 1)
+                    tymczasowyPlikTekstowy << liniaZDanymiAdresataOddzielonePionowymiKreskami;
+                else if (numerWczytanejLinii > 1)
+                    tymczasowyPlikTekstowy << endl << liniaZDanymiAdresataOddzielonePionowymiKreskami;
+            }
+            else
+            {
+                if (numerWczytanejLinii == 1)
+                    tymczasowyPlikTekstowy << wczytanaLinia;
+                else if (numerWczytanejLinii > 1)
+                    tymczasowyPlikTekstowy << endl << wczytanaLinia;
+            }
+            numerWczytanejLinii++;
+        }
+        plikTekstowy.close();
+        tymczasowyPlikTekstowy.close();
+
+        MetodyPomocnicze::usunPlik(NAZWA_PLIKU_Z_ADRESATAMI);
+        MetodyPomocnicze::zmienNazwePliku(nazwaTymczasowegoPlikuZAdresatami, NAZWA_PLIKU_Z_ADRESATAMI);
+    }
     if (czyIstniejeAdresat == false)
     {
         plikTekstowy.close();

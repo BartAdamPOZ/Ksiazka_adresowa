@@ -41,6 +41,7 @@ public:
     bool czyUzytkownikJestZalogowany();
     void wyloguj();
     void usunAdresata();
+    void edytujAdresata();
 };
 
 #endif
