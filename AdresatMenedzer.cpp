@@ -194,3 +194,72 @@ int AdresatMenedzer::podajIdWybranegoAdresata()
     idWybranegoAdresata  = MetodyPomocnicze::wczytajLiczbeCalkowita();
     return idWybranegoAdresata;
 }
+
+void AdresatMenedzer::wyszukajAdresatowPoImieniu()
+{
+    string imiePoszukiwanegoAdresata = "";
+    Adresat adresat;
+
+    system("cls");
+    if (!adresaci.empty())
+    {
+        cout << ">>> WYSZUKIWANIE ADRESATOW O IMIENIU <<<" << endl << endl;
+
+        cout << "Wyszukaj adresatow o imieniu: ";
+        imiePoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(MetodyPomocnicze::wczytajLinie());
+
+        for (unsigned int i = 0; i < adresaci.size(); i++)
+        {
+            if (adresaci[i].pobierzImie() == imiePoszukiwanegoAdresata)
+            {
+                wyswietlDaneAdresata(adresaci[i]);
+                iloscAdresatow++;
+            }
+        }
+        wyswietlIloscWyszukanychAdresatow();
+    }
+    else
+    {
+        cout << endl << "Ksiazka adresowa jest pusta" << endl << endl;
+    }
+    cout << endl;
+    system("pause");
+}
+
+void AdresatMenedzer::wyszukajAdresatowPoNazwisku()
+{
+    string nazwiskoPoszukiwanegoAdresata;
+
+    system("cls");
+    if (!adresaci.empty())
+    {
+        cout << ">>> WYSZUKIWANIE ADRESATOW O NAZWISKU <<<" << endl << endl;
+
+        cout << "Wyszukaj adresatow o nazwisku: ";
+        nazwiskoPoszukiwanegoAdresata = MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(MetodyPomocnicze::wczytajLinie());
+
+        for (unsigned int i = 0; i < adresaci.size(); i++)
+        {
+            if (adresaci[i].pobierzNazwisko() == nazwiskoPoszukiwanegoAdresata)
+            {
+                wyswietlDaneAdresata(adresaci[i]);
+                iloscAdresatow++;
+            }
+        }
+         wyswietlIloscWyszukanychAdresatow();
+    }
+    else
+    {
+        cout << endl << "Ksiazka adresowa jest pusta." << endl << endl;
+    }
+    cout << endl;
+    system("pause");
+}
+
+void AdresatMenedzer::wyswietlIloscWyszukanychAdresatow()
+{
+    if (iloscAdresatow == 0)
+        cout << endl << "W ksiazce adresowej nie ma adresatow z tymi danymi." << endl;
+    else
+        cout << endl << "Ilosc adresatow w ksiazce adresowej wynosi: " << iloscAdresatow << endl << endl;
+}

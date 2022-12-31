@@ -63,7 +63,7 @@ char MetodyPomocnicze::wybierzOpcjeZMenuUzytkownika()
     cout << "3. Wyszukaj po nazwisku - dostepne wkrotce " << endl;
     cout << "4. Wyswietl adresatow" << endl;
     cout << "5. Usun adresata - JUZ DOSTEPNA! " << endl;
-    cout << "6. Edytuj adresata - WERSJA TESTOWA " << endl;
+    cout << "6. Edytuj adresata - JUZ DOSTEPNA! " << endl;
     cout << "---------------------------" << endl;
     cout << "7. Zmien haslo" << endl;
     cout << "8. Wyloguj sie" << endl;
