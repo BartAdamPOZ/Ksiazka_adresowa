@@ -9,6 +9,7 @@
 #include "UzytkownikMenedzer.h"
 #include "MetodyPomocnicze.h"
 #include "Adresat.h"
+#include "PlikTekstowy.h"
 
 
 
