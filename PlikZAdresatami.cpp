@@ -61,18 +61,6 @@ bool PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat)
     return false;
 }
 
-
-
-/*bool PlikZAdresatami::czyPlikJestPusty()
-{
-    plikTekstowy.seekg(0, ios::end);
-    if (plikTekstowy.tellg() == 0)
-        return true;
-    else
-        return false;
-}*/
-
-
 int PlikZAdresatami::getIdOstatniegoAdresata()
 {
     return idOstatniegoAdresata;
