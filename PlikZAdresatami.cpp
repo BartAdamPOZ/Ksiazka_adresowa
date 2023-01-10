@@ -139,12 +139,6 @@ void PlikZAdresatami::setIdZalogowanegoUzytkownika(int idZalogowanegoUzytkownika
     this->idZalogowanegoUzytkownika = idZalogowanegoUzytkownika;
 }
 
-void PlikZAdresatami::setIdUsuwanegoAdresata(int idUsuwanegoAdresata)
-{
-    this->idUsuwanegoAdresata = idUsuwanegoAdresata;
-}
-
-
 void PlikZAdresatami::usunWybranegoAdresataZPliku(int idUsuwanegoAdresata)
 {
     bool czyIstniejeAdresat = false;
