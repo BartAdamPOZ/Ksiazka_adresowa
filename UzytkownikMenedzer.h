@@ -9,7 +9,7 @@
 
 #include "Uzytkownik.h"
 #include "PlikZUzytkownikami.h"
-#include "Adresat.h"
+//#include "Adresat.h"
 
 
 using namespace std;
