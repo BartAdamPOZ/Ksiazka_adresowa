@@ -35,7 +35,6 @@ public:
     void rejestracjaUzytkownika();
     void logowanieUzytkownika();
     void wczytajUzytkownikowZPliku();
-    void wypiszWszystkichUzytkownikow();
     void zmianaHaslaZalogowanegoUzytkownika();
     void dodajAdresata();
     void wyswietlWszystkichAdresatow();

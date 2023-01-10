@@ -31,7 +31,6 @@ public:
     };
     void rejestracjaUzytkownika();
     void logowanieUzytkownika();
-    void wypiszWszystkichUzytkownikow();
     void wczytajUzytkownikowZPliku();
     void zmianaHaslaZalogowanegoUzytkownika();
     static int pobierzIdUzytkownikaZDanychOddzielonychPionowymiKreskami(string daneJednegoAdresataOddzielonePionowymiKreskami);
