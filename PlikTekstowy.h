@@ -9,7 +9,7 @@ using namespace std;
 class PlikTekstowy {
 
 protected:
-    string NAZWA_PLIKU;
+    const string NAZWA_PLIKU;
 
 public:
 
